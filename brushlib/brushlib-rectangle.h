@@ -9,19 +9,27 @@
 #ifndef __BRUSHLIB_RECTANGLE_H__
 #define __BRUSHLIB_RECTANGLE_H__
 
+#include "glib-compat.h"
+
 G_BEGIN_DECLS
 
-typedef struct {
+typedef struct _BrushLibRectangle     BrushLibRectangle;
+
+struct _BrushLibRectangle
+{
   int x;
   int y;
   int width;
   int height;
-} BrushLibRectangle;
+};
 
-void brushlib_rectangle_expand_to_include_point(BrushLibRectangle *self, int x, int y);
 
-BrushLibRectangle *
-brushlib_rectangle_copy(BrushLibRectangle *self);
+/* Rectangle functions
+ */
+void               brushlib_rectangle_expand (BrushLibRectangle *self,
+                                              int x, int y);
+
+BrushLibRectangle *brushlib_rectangle_copy   (BrushLibRectangle *self);
 
 G_END_DECLS
 

@@ -39,6 +39,7 @@ def configure(conf):
     conf.define('GETTEXT_PACKAGE', APPNAME.lower(), quote=True)
     conf.define('PACKAGE', APPNAME.lower(), quote=True)
 
+    conf.define('BRUSHLIB_CONFIG_USE_GLIB', 1)
     conf.define('BRUSHLIB_TITLE_SIZE', 64)
     conf.define('BRUSHLIB_MAX_THREADS', 16)
     conf.define('BRUSHLIB_MAX_MIPMAP_LEVEL', 4)
@@ -46,7 +47,8 @@ def configure(conf):
     conf.env.append_value('CFLAGS', '-DHAVE_CONFIG_H')
     conf.env.append_value('CFLAGS', '-DBRUSHLIB_COMPILATION')
 
-    conf.write_config_header('brushlib-config.h', guard='BRUSHLIB_CONFIG_H')
+    conf.write_config_header('brushlib-config.h',
+                             guard='__BRUSHLIB_CONFIG_H__')
 
     if revision is not None:
         conf.msg('Compiling Git revision', revision)

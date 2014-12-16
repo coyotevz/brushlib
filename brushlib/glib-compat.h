@@ -1,15 +1,13 @@
-#ifndef MYPAINTGLIBCOMPAT_H
-#define MYPAINTGLIBCOMPAT_H
+#ifndef __GLIBCOMPAT_H__
+#define __GLIBCOMPAT_H__
 
-#include <mypaint-config.h>
+#include "brushlib-config.h"
 
-#if MYPAINT_CONFIG_USE_GLIB
+#if BRUSHLIB_CONFIG_USE_GLIB
 
 #include <glib.h>
 
-#else // not MYPAINT_CONFIG_USE_GLIB
-
-#ifndef __G_LIB_H_
+#else // not BRUSHLIB_CONFIG_USE_GLIB
 
 /* From $INCLUDEPATH/glib-2.0/glib/gmacros.h */
 #ifdef  __cplusplus
@@ -33,8 +31,6 @@ typedef gint gboolean;
 /* From $LIBPATH/glib-2.0/include/glibconfig.h */
 typedef unsigned short guint16;
 
-#endif // __G_LIB_H_
+#endif /* BRUSHLIB_CONFIG_USE_GLIB */
 
-#endif // MYPAINT_CONFIG_USE_GLIB
-
-#endif // MYPAINTGLIBCOMPAT_H
+#endif /* __GLIBCOMPAT_H__ */

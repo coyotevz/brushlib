@@ -6,7 +6,7 @@ def build(bld):
         uselib='GLIB JSONC',
         source=bld.path.ant_glob('*.c'),
         target='brushlib',
-        includes='.',
+        includes='. ..',
     )
 
 # vim:ft=python
