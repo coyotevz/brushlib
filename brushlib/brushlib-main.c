@@ -27,6 +27,10 @@
 
 #include <stdlib.h>
 
+#ifdef _OPENMP
+#include <omp.h>
+#endif
+
 #include "brushlib-main.h"
 #include "brushlib-debug.h"
 #include "brushlib-version.h"
@@ -122,6 +126,30 @@ brushlib_parse_args(guint   *argc,
   return ret;
 }
 
+void
+ensure_max_threads(void)
+{
+#if _OPENMP
+  const int max_threads = omp_get_max_threads();
+  if (max_threads > BRUSHLIB_MAX_THREADS)
+    omp_set_num_threads(BRUSHLIB_MAX_THREADS);
+#endif
+}
+
+void
+brushlib_base_init(void)
+{
+  if (!brushlib_is_initialized)
+  {
+    brushlib_is_initialized = TRUE;
+
+    //bindtextdomain (GETTEXT_PACKAGE, LOCALEDIR);
+    //bind_textdomain_codeset (GETTEXT_PACKAGE, "UTF-8");
+
+    ensure_max_threads();
+  }
+}
+
 /**
  * brushlib_init:
  * @argc: The number of arguments in @argv
@@ -135,9 +163,14 @@ brushlib_parse_args(guint   *argc,
  */
 BrushLibInitError
 brushlib_init(int    *argc,
-         char ***argv)
+              char ***argv)
 {
-  GError *error;
+  GError *error = NULL;
+
+  if (brushlib_is_initialized)
+    return BRUSHLIB_INIT_SUCCESS;
+
+  brushlib_base_init();
 
   if (brushlib_parse_args(argc, argv) == FALSE) {
     return BRUSHLIB_INIT_ERROR_INTERNAL;
