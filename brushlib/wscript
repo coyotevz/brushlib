@@ -1,0 +1,12 @@
+
+def build(bld):
+
+    brushlib = bld(
+        features='c cshlib',
+        uselib='GLIB JSONC',
+        source=bld.path.ant_glob('*.c'),
+        target='brushlib',
+        includes='.',
+    )
+
+# vim:ft=python

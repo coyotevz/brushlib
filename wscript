@@ -34,14 +34,17 @@ def configure(conf):
     revision = get_git_rev(conf)
 
     conf.define('ENABLE_NLS', 1)
-    conf.define('PACKAGE', APPNAME, quote=True)
     conf.define('VERSION', VERSION, quote=True)
     conf.define('REVISION', revision or '-1', quote=True)
-    conf.define('GETTEXT_PACKAGE', APPNAME, quote=True)
+    conf.define('GETTEXT_PACKAGE', APPNAME.lower(), quote=True)
+    conf.define('PACKAGE', APPNAME.lower(), quote=True)
 
     conf.define('BRUSHLIB_TITLE_SIZE', 64)
     conf.define('BRUSHLIB_MAX_THREADS', 16)
     conf.define('BRUSHLIB_MAX_MIPMAP_LEVEL', 4)
+
+    conf.env.append_value('CCFLAGS', '-DHAVE_CONFIG_H')
+    conf.env.append_value('CCFLAGS', '-DBRUSHLIB_COMPILATION')
 
     conf.write_config_header('brushlib-config.h', guard='BRUSHLIB_CONFIG_H')
 
@@ -50,13 +53,7 @@ def configure(conf):
 
 
 def build(bld):
-    bld(
-        features='c cshlib',
-        source=bld.path.ant_glob('*.c'),
-        target='brushlib',
-        includes='.',
-        use='GLIB JSONC',
-    )
+    bld.recurse('brushlib')
 
 
 def get_git_rev(conf):
