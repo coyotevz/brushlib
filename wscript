@@ -43,8 +43,8 @@ def configure(conf):
     conf.define('BRUSHLIB_MAX_THREADS', 16)
     conf.define('BRUSHLIB_MAX_MIPMAP_LEVEL', 4)
 
-    conf.env.append_value('CCFLAGS', '-DHAVE_CONFIG_H')
-    conf.env.append_value('CCFLAGS', '-DBRUSHLIB_COMPILATION')
+    conf.env.append_value('CFLAGS', '-DHAVE_CONFIG_H')
+    conf.env.append_value('CFLAGS', '-DBRUSHLIB_COMPILATION')
 
     conf.write_config_header('brushlib-config.h', guard='BRUSHLIB_CONFIG_H')
 
