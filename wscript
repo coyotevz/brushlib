@@ -1,5 +1,5 @@
 #
-# mypaintlib build script
+# brushlib build script
 #
 
 import os
@@ -7,7 +7,7 @@ import os
 brushlib_major_version = 1
 brushlib_minor_version = 1
 
-APPNAME = 'mypaint'
+APPNAME = 'brushlib'
 VERSION = '.'.join([str(v) for v in [brushlib_major_version,
                                      brushlib_minor_version]])
 
@@ -39,11 +39,11 @@ def configure(conf):
     conf.define('REVISION', revision or '-1', quote=True)
     conf.define('GETTEXT_PACKAGE', APPNAME, quote=True)
 
-    conf.define('MYPAINT_TITLE_SIZE', 64)
-    conf.define('MYPAINT_MAX_THREADS', 16)
-    conf.define('MYPAINT_MAX_MIPMAP_LEVEL', 4)
+    conf.define('BRUSHLIB_TITLE_SIZE', 64)
+    conf.define('BRUSHLIB_MAX_THREADS', 16)
+    conf.define('BRUSHLIB_MAX_MIPMAP_LEVEL', 4)
 
-    conf.write_config_header('mypaint-config.h', guard='MYPAINTCONFIG_H')
+    conf.write_config_header('brushlib-config.h', guard='BRUSHLIB_CONFIG_H')
 
     if revision is not None:
         conf.msg('Compiling Git revision', revision)
@@ -53,7 +53,7 @@ def build(bld):
     bld(
         features='c cshlib',
         source=bld.path.ant_glob('*.c'),
-        target='mypaint',
+        target='brushlib',
         includes='.',
         use='GLIB JSONC',
     )
