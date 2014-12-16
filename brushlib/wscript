@@ -1,6 +1,13 @@
 
 def build(bld):
 
+    brushlib_version_h = bld(
+        features='subst',
+        source = 'brushlib-version.h.in',
+        target = 'brushlib-version.h',
+        **bld.env['subst_dict']
+    )
+
     brushlib = bld(
         features='c cshlib',
         uselib='GLIB JSONC',

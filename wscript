@@ -6,10 +6,15 @@ import os
 
 brushlib_major_version = 1
 brushlib_minor_version = 1
+brushlib_micro_version = '0'
 
 APPNAME = 'brushlib'
 VERSION = '.'.join([str(v) for v in [brushlib_major_version,
-                                     brushlib_minor_version]])
+                                     brushlib_minor_version,
+                                     brushlib_micro_version]])
+
+brushlib_api_version = '.'.join([str(v) for v in [brushlib_major_version,
+                                                  brushlib_minor_version]])
 
 top = '.'
 out = 'build'
@@ -27,6 +32,8 @@ def configure(conf):
 
     conf.check_cc(lib='m', cflags='-Wall', uselib_store='M')
     conf.check_cfg(package='glib-2.0', uselib_store='GLIB', mandatory=True,
+                   args='--cflags --libs')
+    conf.check_cfg(package='gobject-2.0', uselib_store='GOBJECT', mandatory=True,
                    args='--cflags --libs')
     conf.check_cfg(package='json-c', uselib_store='JSONC', mandatory=True,
                    args='--cflags --libs')
@@ -47,8 +54,21 @@ def configure(conf):
     conf.env.append_value('CFLAGS', '-DHAVE_CONFIG_H')
     conf.env.append_value('CFLAGS', '-DBRUSHLIB_COMPILATION')
 
-    conf.write_config_header('brushlib-config.h',
+    conf.write_config_header('config.h',
                              guard='__BRUSHLIB_CONFIG_H__')
+
+    conf.env['subst_dict'] = {
+        "prefix": conf.env["PREFIX"],
+        "BRUSHLIB_MAJOR_VERSION": brushlib_major_version,
+        "BRUSHLIB_MINOR_VERSION": brushlib_minor_version,
+        "BRUSHLIB_MICRO_VERSION": brushlib_micro_version,
+        "BRUSHLIB_VERSION": VERSION,
+        "BRUSHLIB_REQUIRES": "glib-2.0 >= 2.12 gobject-2.0",
+        "VERSION": VERSION,
+    }
+
+    conf.env["BRUSHLIB_INCLUDE_PATH"] = "include/brushlib-%s" % brushlib_api_version
+    conf.env["BRUSHLIB_HEADERS_PATH"] = "include/brushlib-%s/brushlib" % brushlib_api_version
 
     if revision is not None:
         conf.msg('Compiling Git revision', revision)
