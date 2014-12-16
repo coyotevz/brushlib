@@ -9,7 +9,7 @@
 #ifndef __BRUSHLIB_RECTANGLE_H__
 #define __BRUSHLIB_RECTANGLE_H__
 
-#include "glib-compat.h"
+#include <glib.h>
 
 G_BEGIN_DECLS
 
