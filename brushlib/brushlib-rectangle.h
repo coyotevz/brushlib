@@ -21,18 +21,36 @@
 #ifndef __BRUSHLIB_RECTANGLE_H__
 #define __BRUSHLIB_RECTANGLE_H__
 
-#include <glib.h>
+#include <glib-object.h>
 
 G_BEGIN_DECLS
 
+#define BRUSHLIB_TYPE_RECTANGLE                (brushlib_rectangle_get_type())
+#define BRUSHLIB_VALUE_HOLDS_RECTANGLE(value)  (G_TYPE_CHECK_VALUE_TYPE((value), BRUSHLIB_TYPE_RECTANGLE))
+
 typedef struct _BrushLibRectange BrushLibRectangle;
 
+/**
+ * BrushLibRectangle:
+ * @x: x origin component
+ * @y: y origin component
+ * @width: width of rectangle
+ * @height: height of rectangle
+ *
+ * Rectangle representation.
+ */
 struct _BrushLibRectange {
   gint x;
   gint y;
   guint width;
   guint height;
 };
+
+BrushLibRectangle *brushlib_rectangle_copy     (const BrushLibRectangle *rectangle);
+void               brushlib_rectangle_free     (BrushLibRectangle       *rectangle);
+GType              brushlib_rectangle_get_type (void) G_GNUC_CONST;
+void               brushlib_rectangle_expand   (BrushLibRectangle       *self,
+                                                gint x, gint y);
 
 G_END_DECLS
 
