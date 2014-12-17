@@ -1,5 +1,6 @@
 /* 
  * BrushLib - The MyPaint Brush Library
+ *
  * Copyright (C) 2014 Augusto Roccasalva <augusto@rioplomo.com.ar>
  *
  * Permission to use, copy, modify, and/or distribute this software for any

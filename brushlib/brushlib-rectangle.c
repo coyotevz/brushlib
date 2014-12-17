@@ -1,5 +1,6 @@
 /* 
- * brushlib - The MyPaint Brush Library
+ * BrushLib - The MyPaint Brush Library
+ *
  * Copyright (C) 2008 Martin Renold <martinxyz@gmx.ch>
  * Copyright (C) 2012 Jon Nordby <jononor@gmail.com>
  * Copyright (C) 2014 Augusto Roccasalva <augusto@rioplomo.com.ar>
