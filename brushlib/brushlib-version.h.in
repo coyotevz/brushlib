@@ -30,8 +30,8 @@
 #define BRUSHLIB_VERSION_STR       "@BRUSHLIB_VERSION@"
 
 #define BRUSHLIB_VERSION_HEX       ((BRUSHLIB_MAJOR_VERSION << 24) | \
-                               (BRUSHLIB_MINOR_VERSION << 16) | \
-                               (BRUSHLIB_MICRO_VERSION << 8))
+                                   (BRUSHLIB_MINOR_VERSION << 16) | \
+                                   (BRUSHLIB_MICRO_VERSION << 8))
 
 #define BRUSHLIB_CHECK_VERSION(major,minor,micro)    \
   (BRUSHLIB_MAJOR_VERSION > (major) ||               \
