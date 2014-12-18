@@ -52,6 +52,7 @@ def configure(conf):
     revision = get_git_rev(conf)
 
     if not conf.options.no_nls:
+        # TODO: complete this feature
         conf.define('ENABLE_NLS', 1)
         conf.define('GETTEXT_PACKAGE', APPNAME.lower(), quote=True)
 
