@@ -21,9 +21,9 @@
 
 #define __BRUSHLIB_H_INSIDE__
 
-#include "brushlib-main.h"
-#include "brushlib-version.h"
-#include "brushlib-debug.h"
+#include <brushlib/brushlib-main.h>
+#include <brushlib/brushlib-version.h>
+#include <brushlib/brushlib-debug.h>
 
 #undef __BRUSHLIB_H_INSIDE__
 

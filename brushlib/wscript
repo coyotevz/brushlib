@@ -3,6 +3,17 @@ def build(bld):
 
     #print(bld.env)
 
+    public_h = """
+    brushlib-types.h
+    brushlib-debug.h
+    brushlib-main.h
+    brushlib-rectangle.h
+    brushlib-surface.h
+    brushlib-version.h
+    """
+
+    main_public_h = "brushlib.h"
+
     brushlib_version_h = bld(
         features='subst',
         source = 'brushlib-version.h.in',
@@ -11,7 +22,6 @@ def build(bld):
     )
 
     brushlib = bld(
-        name='lib',
         features='c cshlib',
         uselib='GLIB GOBJECT JSONC',
         source=bld.path.ant_glob('*.c'),
@@ -22,23 +32,21 @@ def build(bld):
     if 'GI_SCANNER' in bld.env and 'GI_COMPILER' in bld.env:
         bld.add_group()
 
-        gir_sources = """
+        gir_sources = public_h + """
         brushlib-main.c
-        brushlib-main.h
         brushlib-rectangle.c
-        brushlib-rectangle.h
-        brushlib-debug.h
+        brushlib-surface.c
         """
 
         gir = bld(
             name='gir-scanner',
-            after='lib',
             rule='${GI_SCANNER} --warn-all --no-libtool --quiet ' +
                  '--namespace=${GI_NAMESPACE} ' +
                  '--nsversion=${API_VERSION} ' +
                  '--symbol-prefix=brushlib ' +
                  '--include=GObject-2.0 ' +
-                 '-I{} '.format(bld.path.get_bld().abspath()) +
+                 '-I{} '.format(bld.path.parent.abspath()) +
+                 '-I{} '.format(bld.path.get_bld().parent.abspath()) +
                  '-DBRUSHLIB_COMPILATION ' +
                  '--library={} '.format(brushlib.target) +
                  '--library-path={} '.format(bld.path.get_bld().abspath()) +
