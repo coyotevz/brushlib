@@ -19,41 +19,42 @@ def build(bld):
         includes='. ..',
     )
 
-    bld.add_group()
+    if 'GI_SCANNER' in bld.env and 'GI_COMPILER' in bld.env:
+        bld.add_group()
 
-    gir_sources = """
-    brushlib-main.c
-    brushlib-main.h
-    brushlib-rectangle.c
-    brushlib-rectangle.h
-    brushlib-debug.h
-    """
+        gir_sources = """
+        brushlib-main.c
+        brushlib-main.h
+        brushlib-rectangle.c
+        brushlib-rectangle.h
+        brushlib-debug.h
+        """
 
-    gir = bld(
-        name='gir-scanner',
-        after='lib',
-        rule='g-ir-scanner --warn-all --no-libtool --quiet ' +
-             '--namespace={} '.format(bld.env.GI_NAMESPACE) +
-             '--nsversion={} '.format(bld.env.API_VERSION) +
-             '--symbol-prefix=brushlib ' +
-             '--include=GObject-2.0 ' +
-             '-I{} '.format(bld.path.get_bld().abspath()) +
-             '-DBRUSHLIB_COMPILATION ' +
-             '--library={} '.format(brushlib.target) +
-             '--library-path={} '.format(bld.path.get_bld().abspath()) +
-             '--output=${TGT} ${SRC}',
-        target='{}-{}.gir'.format(bld.env.GI_NAMESPACE, bld.env.API_VERSION),
-        source=gir_sources,
-        install_path='${LIBDIR}/girepository-1.0',
-    )
+        gir = bld(
+            name='gir-scanner',
+            after='lib',
+            rule='${GI_SCANNER} --warn-all --no-libtool --quiet ' +
+                 '--namespace=${GI_NAMESPACE} ' +
+                 '--nsversion=${API_VERSION} ' +
+                 '--symbol-prefix=brushlib ' +
+                 '--include=GObject-2.0 ' +
+                 '-I{} '.format(bld.path.get_bld().abspath()) +
+                 '-DBRUSHLIB_COMPILATION ' +
+                 '--library={} '.format(brushlib.target) +
+                 '--library-path={} '.format(bld.path.get_bld().abspath()) +
+                 '--output=${TGT} ${SRC}',
+            target='{}-{}.gir'.format(bld.env.GI_NAMESPACE, bld.env.API_VERSION),
+            source=gir_sources,
+            install_path='${LIBDIR}/girepository-1.0',
+        )
 
-    typelib = bld(
-        name='gir-compiler',
-        after='gir-scanner',
-        rule='g-ir-compiler ${SRC} -o ${TGT}',
-        source=gir.target,
-        target='{}-{}.typelib'.format(bld.env.GI_NAMESPACE, bld.env.API_VERSION),
-        install_path='${LIBDIR}/girepository-1.0',
-    )
+        typelib = bld(
+            name='gir-compiler',
+            after='gir-scanner',
+            rule='${GI_COMPILER} ${SRC} -o ${TGT}',
+            source=gir.target,
+            target='{}-{}.typelib'.format(bld.env.GI_NAMESPACE, bld.env.API_VERSION),
+            install_path='${LIBDIR}/girepository-1.0',
+        )
 
 # vim:ft=python

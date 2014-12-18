@@ -23,8 +23,12 @@ out = 'build'
 
 def options(opt):
     opt.load('compiler_c')
-    opt.add_option('--no-scm', action='store_true', default=False,
-                   help='Disable SCM detection [default: No]', dest='no_scm')
+    opt.add_option('--no-scm', action='store_true', dest='no_scm',
+                   help='Disable SCM detection [default: No]')
+    opt.add_option('--no-nls', action='store_true', dest='no_nls',
+                   help='Disable i18n (native language support)')
+    opt.add_option('--no-gir', action='store_true', dest='no_gir',
+                   help='Disable Build GObject instrospection data')
 
 
 def configure(conf):
@@ -47,13 +51,18 @@ def configure(conf):
 
     revision = get_git_rev(conf)
 
-    conf.define('ENABLE_NLS', 1)
+    if not conf.options.no_nls:
+        conf.define('ENABLE_NLS', 1)
+        conf.define('GETTEXT_PACKAGE', APPNAME.lower(), quote=True)
+
+    if not conf.options.no_gir:
+        conf.find_program('g-ir-scanner', var='GI_SCANNER')
+        conf.find_program('g-ir-compiler', var='GI_COMPILER')
+
     conf.define('VERSION', VERSION, quote=True)
     conf.define('REVISION', revision or '-1', quote=True)
-    conf.define('GETTEXT_PACKAGE', APPNAME.lower(), quote=True)
     conf.define('PACKAGE', APPNAME.lower(), quote=True)
 
-    conf.define('BRUSHLIB_CONFIG_USE_GLIB', 1)
     conf.define('BRUSHLIB_TITLE_SIZE', 64)
     conf.define('BRUSHLIB_MAX_THREADS', 16)
     conf.define('BRUSHLIB_MAX_MIPMAP_LEVEL', 4)
