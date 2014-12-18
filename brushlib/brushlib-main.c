@@ -65,7 +65,7 @@ static GOptionEntry brushlib_args[] = {
 
 
 /**
- * buik_get_option_group:
+ * brushlib_get_option_group: (skip)
  *
  * Returns a #GOptionGroup for the command line arguments recognized by BrushLib.
  * You should add this groups to your #GOptionContext with
