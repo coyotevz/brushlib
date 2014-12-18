@@ -18,53 +18,99 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#ifndef __BRUSHLIB_SURFACE_H__
-#define __BRUSHLIB_SURFACE_H__
-
 #if !defined(__BRUSHLIB_H_INSIDE__) && !defined (BRUSHLIB_COMPILATION)
 #error "Only <brushlib/brushlib.h> can be included directly."
 #endif
 
+#ifndef __BRUSHLIB_SURFACE_H__
+#define __BRUSHLIB_SURFACE_H__
+
+#include <glib-object.h>
+#include <brushlib/brushlib-types.h>
+
 G_BEGIN_DECLS
 
-typedef struct _BrushLibSurface BrushLibSurface;
+#define BRUSHLIB_TYPE_SURFACE \
+  (brushlib_surface_get_type())
+#define BRUSHLIB_SURFACE(obj) \
+  (G_TYPE_CHECK_INSTANCE_CAST((obj), BRUSHLB_TYPE_SURFACE, BrushLibSurface))
+#define BRUSHLIB_SURFACE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_CAST((klass), BRUSHLIB_TYPE_SURFACE, BrushLibSurfaceClass))
+#define BRUSHLIB_IS_SURFACE(obj) \
+  (G_TYPE_CHECK_INSTANCE_TYPE((obj), BRUSHLIB_TYPE_SURFACE))
+#define BRUSHLIB_IS_SURFACE_CLASS(klass) \
+  (G_TYPE_CHECK_CLASS_TYPE((klass), BRUSHLIB_TYPE_SURAFCE))
+#define BRUSHLIB_SURFACE_GET_CLASS(obj) \
+  (G_TYPE_INSTANCE_GET_CLASS((obj), BRUSHLIB_TYPE_SURFACE, BrushLibSurfaceClass))
 
-typedef gint (*BrushLibDrawDabFunction) (BrushLibSurface *self,
-                                         gfloat x, gfloat y,
+
+/* BrushLibSurface alias is defined in brushlib-types.h */
+typedef struct _BrushLibSurfaceClass    BrushLibSurfaceClass;
+typedef struct _BrushLibSurfacePrivate  BrushLibSurfacePrivate;
+
 
 /**
  * BrushLibSurface:
  *
- * Abstract surface type for BrushLib brush engine. The surface interface lets
- * th brush engine specify dabs to render, and to pick color.
+ * Abstract surface type for BrushLib brush engine.  The surface interface lets
+ * the brush engine specify dabs to render, and to pick color.
  */
-struct _BrushLibSurface {
-     BrushLibSurfaceDrawDabFunction       draw_dab;
-     BrushLibSurfaceGetColorFunction      get_color;
-     BrushLibSurfaceBeginAtomicFunction   begin_static;
-     BrushLibSurfaceEndAtomicFunction     end_atomic;
-     BrushLibSurfaceDestroyFunction       destroy;
-     BrushLibSurfactSavePng               save_png;
-}
+struct _BrushLibSurface
+{
+  /*< private >*/
+  GObject parent_instance;
+
+  /*< public >*/
+  guint32 flags;
+
+  BrushLibSurfacePrivate *priv;
+};
 
 /**
- * brushlib_surface_draw_dab:
- *
- * Draw a dab onto the surface.
+ * BrushLibSurfaceClass:
  */
-gint    brushlib_surface_draw_dab     (BrushLibSurface *self,
-                                       gfloat x, gfloat y,
-                                       gfloat radius,
-                                       gfloat color_r,
-                                       gfloat color_g,
-                                       gfloat color_b,
-                                       gfloat opaque,
-                                       gfloat hardness,
-                                       gfloat alpha_eraser,
-                                       gfloat aspet_ratio,
-                                       gfloat angle,
-                                       gfloat lock_alpha,
-                                       gfloat colorize);
+struct _BrushLibSurfaceClass
+{
+  /*< private >*/
+  GObjectClass parent_class;
+
+  /* basic methods */
+  guint   (* draw_dab)          (BrushLibSurface         *surface,
+                                 const BrushLibPoint     *point,
+                                 const BrushLibColor     *color,
+                                 const BrushLibBrush     *brush);
+  void    (* get_color)         (const BrushLibSurface   *surface,
+                                 const BrushLibPoint     *point,
+                                 BrushLibColor           *color);
+  gfloat  (* get_alpha)         (const BrushLibSurface   *surface,
+                                 const BrushLibPoint     *point);
+  void    (* save_png)          (const BrushLibSurface   *surface,
+                                 const char              *path,
+                                 const BrushLibRectangle *rectangle);
+
+  void    (* begin_atomic)      (BrushLibSurface         *surface);
+  void    (* end_atomic)        (BrushLibSurface         *surface);
+};
+
+GType             brushlib_surface_get_type     (void) G_GNUC_CONST;
+BrushLibSurface * brushlib_surface_new          (GType type,
+                                                 const char *first_property_name,
+                                                 ...);
+
+guint             brushlib_surface_draw_dab     (BrushLibSurface         *surface,
+                                                 const BrushLibPoint     *point,
+                                                 const BrushLibColor     *color,
+                                                 const BrushLibBrush     *brush);
+void              brushlib_surface_get_color    (const BrushLibSurface   *surface,
+                                                 const BrushLibPoint     *point,
+                                                 BrushLibColor           *color);
+gfloat            brushlib_surface_get_alpha    (const BrushLibSurface   *surface,
+                                                 const BrushLibPoint     *point);
+void              brushlib_surface_save_png     (const BrushLibSurface   *surface,
+                                                 const char              *path,
+                                                 const BrushLibRectangle *rectangle);
+void              brushlib_surface_begin_atomic (BrushLibSurface         *surface);
+void              brushlib_surface_end_atomic   (BrushLibSurface         *surface);
 
 G_END_DECLS
 

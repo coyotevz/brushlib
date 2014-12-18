@@ -1,8 +1,6 @@
 /* 
  * BrushLib - The MyPaint Brush Library
  *
- * Copyright (C) 2008 Martin Renold <martinxyz@gmx.ch>
- * Copyright (C) 2012 Jon Nordby <jononor@gmail.com>
  * Copyright (C) 2014 Augusto Roccasalva <augusto@rioplomo.com.ar>
  *
  * Permission to use, copy, modify, and/or distribute this software for any
@@ -22,24 +20,46 @@
 #error "Only <brushlib/brushlib.h> can be included directly."
 #endif
 
-#ifndef __BRUSHLIB_RECTANGLE_H__
-#define __BRUSHLIB_RECTANGLE_H__
+#ifndef __BRUSHLIB_TYPES_H__
+#define __BRUSHLIB_TYPES_H__
 
 #include <glib-object.h>
-#include <brushlib/brushlib-types.h>
 
 G_BEGIN_DECLS
 
-#define BRUSHLIB_TYPE_RECTANGLE                (brushlib_rectangle_get_type())
-#define BRUSHLIB_VALUE_HOLDS_RECTANGLE(value)  (G_TYPE_CHECK_VALUE_TYPE((value), BRUSHLIB_TYPE_RECTANGLE))
+/* Forward declarations to avoid header catch */
+typedef struct _BrushLibSurface     BrushLibSurface;
+typedef struct _BrushLibRectangle   BrushLibRectangle;
+typedef struct _BrushLibPoint       BrushLibPoint;
+typedef struct _BrushLibColor       BrushLibColor;
+typedef struct _BrushLibBrush       BrushLibBrush;
 
-BrushLibRectangle *brushlib_rectangle_copy     (const BrushLibRectangle *rectangle);
-void               brushlib_rectangle_free     (BrushLibRectangle       *rectangle);
-GType              brushlib_rectangle_get_type (void) G_GNUC_CONST;
-void               brushlib_rectangle_expand   (BrushLibRectangle       *self,
-                                                gint x, gint y);
+
+struct _BrushLibPoint
+{
+  gint   x;
+  gint   y;
+  gfloat radius;
+};
+
+/**
+ * BrushLibRectangle:
+ * @x: x origin component
+ * @y: y origin component
+ * @width: width of rectangle
+ * @height: height of rectangle
+ *
+ * Rectangle representation.
+ */
+struct _BrushLibRectangle
+{
+  gint x;
+  gint y;
+  gint width;
+  gint height;
+};
 
 G_END_DECLS
 
-#endif /* __BRUSHLIB_RECTANGLE_H__ */
+#endif /* __BRUSHLIB_TYPES_H__ */
 
