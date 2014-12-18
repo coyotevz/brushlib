@@ -13,7 +13,7 @@ def build(bld):
     brushlib = bld(
         name='lib',
         features='c cshlib',
-        uselib='GLIB JSONC',
+        uselib='GLIB GOBJECT JSONC',
         source=bld.path.ant_glob('*.c'),
         target='brushlib',
         includes='. ..',
@@ -44,6 +44,15 @@ def build(bld):
              '--output=${TGT} ${SRC}',
         target='{}-{}.gir'.format(bld.env.GI_NAMESPACE, bld.env.API_VERSION),
         source=gir_sources,
+        install_path='${LIBDIR}/girepository-1.0',
+    )
+
+    typelib = bld(
+        name='gir-compiler',
+        after='gir-scanner',
+        rule='g-ir-compiler ${SRC} -o ${TGT}',
+        source=gir.target,
+        target='{}-{}.typelib'.format(bld.env.GI_NAMESPACE, bld.env.API_VERSION),
         install_path='${LIBDIR}/girepository-1.0',
     )
 
