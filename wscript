@@ -9,6 +9,7 @@ brushlib_minor_version = 1
 brushlib_micro_version = '0'
 
 APPNAME = 'brushlib'
+GI_NAMESPACE = 'BrushLib'
 VERSION = '.'.join([str(v) for v in [brushlib_major_version,
                                      brushlib_minor_version,
                                      brushlib_micro_version]])
@@ -29,6 +30,12 @@ def options(opt):
 def configure(conf):
     conf.check_waf_version(mini='1.8.5')
     conf.load('compiler_c')
+
+    # share data with other contexts
+    conf.env.APPNAME = APPNAME
+    conf.env.GI_NAMESPACE = GI_NAMESPACE
+    conf.env.VERSION = VERSION
+    conf.env.API_VERSION = brushlib_api_version
 
     conf.check_cc(lib='m', cflags='-Wall', uselib_store='M')
     conf.check_cfg(package='glib-2.0', uselib_store='GLIB', mandatory=True,

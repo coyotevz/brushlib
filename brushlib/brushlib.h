@@ -23,7 +23,7 @@
 
 #include "brushlib-main.h"
 #include "brushlib-version.h"
-#include "brushlib-debugh.h"
+#include "brushlib-debug.h"
 
 #undef __BRUSHLIB_H_INSIDE__
 

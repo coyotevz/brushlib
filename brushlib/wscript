@@ -1,6 +1,8 @@
 
 def build(bld):
 
+    #print(bld.env)
+
     brushlib_version_h = bld(
         features='subst',
         source = 'brushlib-version.h.in',
@@ -9,11 +11,40 @@ def build(bld):
     )
 
     brushlib = bld(
+        name='lib',
         features='c cshlib',
         uselib='GLIB JSONC',
         source=bld.path.ant_glob('*.c'),
         target='brushlib',
         includes='. ..',
+    )
+
+    bld.add_group()
+
+    gir_sources = """
+    brushlib-main.c
+    brushlib-main.h
+    brushlib-rectangle.c
+    brushlib-rectangle.h
+    brushlib-debug.h
+    """
+
+    gir = bld(
+        name='gir-scanner',
+        after='lib',
+        rule='g-ir-scanner --warn-all --no-libtool --quiet ' +
+             '--namespace={} '.format(bld.env.GI_NAMESPACE) +
+             '--nsversion={} '.format(bld.env.API_VERSION) +
+             '--symbol-prefix=brushlib ' +
+             '--include=GObject-2.0 ' +
+             '-I{} '.format(bld.path.get_bld().abspath()) +
+             '-DBRUSHLIB_COMPILATION ' +
+             '--library={} '.format(brushlib.target) +
+             '--library-path={} '.format(bld.path.get_bld().abspath()) +
+             '--output=${TGT} ${SRC}',
+        target='{}-{}.gir'.format(bld.env.GI_NAMESPACE, bld.env.API_VERSION),
+        source=gir_sources,
+        install_path='${LIBDIR}/girepository-1.0',
     )
 
 # vim:ft=python
