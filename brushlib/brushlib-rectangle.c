@@ -36,14 +36,8 @@
 BrushLibRectangle *
 brushlib_rectangle_copy(const BrushLibRectangle *rectangle)
 {
-  BrushLibRectangle *new_rectangle;
-
   g_return_val_if_fail (rectangle != NULL, NULL);
-
-  new_rectangle = g_slice_new (BrushLibRectangle);
-  *new_rectangle = *rectangle;
-
-  return new_rectangle;
+  return g_slice_dup (BrushLibRectangle, rectangle);
 }
 
 /**
@@ -56,22 +50,12 @@ void
 brushlib_rectangle_free(BrushLibRectangle *rectangle)
 {
   g_return_if_fail (rectangle != NULL);
-  g_slice_free(BrushLibRectangle, rectangle);
+  g_slice_free (BrushLibRectangle, rectangle);
 }
 
-GType
-brushlib_rectangle_get_type(void)
-{
-  static GType type = 0;
-
-  if (!type) {
-    type = g_boxed_type_register_static(I_("BrushLibRectangle"),
-                                        (GBoxedCopyFunc) brushlib_rectangle_copy,
-                                        (GBoxedFreeFunc) brushlib_rectangle_free);
-  }
-
-  return type;
-}
+G_DEFINE_BOXED_TYPE (BrushLibRectangle, brushlib_rectangle,
+                     brushlib_rectangle_copy,
+                     brushlib_rectangle_free)
 
 void
 brushlib_rectangle_expand (BrushLibRectangle *self,

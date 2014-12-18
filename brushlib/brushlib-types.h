@@ -35,6 +35,14 @@ typedef struct _BrushLibColor       BrushLibColor;
 typedef struct _BrushLibBrush       BrushLibBrush;
 
 
+/**
+ * BrushLibPoint:
+ * @x: x coordinate
+ * @y: y coordinate
+ * @radius: radius of point
+ *
+ * Point with radius representation.
+ */
 struct _BrushLibPoint
 {
   gint   x;
