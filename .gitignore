@@ -3,8 +3,6 @@
 .waf*
 .lock-waf*
 build
-*-gen.h
-mypaint-config.h
 
 
 #*.so
