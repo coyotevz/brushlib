@@ -22,7 +22,7 @@
 
 static guint32 __id = 0;
 
-#define BRUSHLIB_SURFACE_GET_PRIVATE (w) \
+#define BRUSHLIB_SURFACE_GET_PRIVATE(w) \
   (G_TYPE_INSTANCE_GET_PRIVATE ((w), BRUSHLIB_TYPE_SURFACE, BrushLibSurfacePrivate))
 
 typedef struct _BrushLibSurfacePrivate BrushLibSurfacePrivate;
@@ -47,6 +47,13 @@ enum {
 
   LAST_SIGNAL
 };
+
+
+/* --- prototypes --- */
+static guint surface_draw_dab_impl (BrushLibSurface *surface,
+                                    const BrushLibPoint *point,
+                                    const BrushLibColor *color,
+                                    const BrushLibBrush *brush);
 
 
 static guint           surface_signals[LAST_SIGNAL] = { 0, };
@@ -90,12 +97,12 @@ brushlib_surface_class_init (BrushLibSurfaceClass *klass)
   gobject_class->set_property = brushlib_surface_set_property;
   gobject_class->get_property = brushlib_surface_get_property;
 
-  klass->draw_dab = brushlib_surface_draw_dab;
-  klass->get_color = brushlib_surface_get_color;
-  klass->get_alpha = brushlib_surface_get_alpha;
-  klass->save_png = brushlib_surface_save_png;
-  klass->begin_atomic = brushlib_surface_begin_atomic;
-  klass->end_atomic = brushlib_surface_end_atomic;
+  klass->draw_dab = surface_draw_dab_impl;
+  //klass->get_color = surface_get_color_impl;
+  //klass->get_alpha = surface_get_alpha_impl;
+  //klass->save_png = surface_save_png_impl;
+  //klass->begin_atomic = surface_begin_atomic_impl;
+  //klass->end_atomic = surface_end_atomic_impl;
 
   brushlib_surface_parent_class = g_type_class_peek_parent (klass);
 
@@ -113,3 +120,26 @@ brushlib_surface_init (BrushLibSurface *surface)
 
   priv->id = __id++;
 }
+
+guint brushlib_surface_draw_dab (BrushLibSurface     *surface,
+                                 const BrushLibPoint *point,
+                                 const BrushLibColor *color,
+                                 const BrushLibBrush *brush)
+{
+  g_return_if_fail (BRUSHLIB_IS_SURFACE (surface));
+  return BRUSHLIB_SURFACE_GET_CLASS(surface)->draw_dab(surface,
+                                                       point,
+                                                       color,
+                                                       brush);
+}
+
+/* --- default implementation --- */
+static guint
+surface_draw_dab_impl (BrushLibSurface     *surface,
+                       const BrushLibPoint *point,
+                       const BrushLibColor *color,
+                       const BrushLibBrush *brush)
+{
+  g_message("Default implementation for surface_draw_dab()");
+  return 0;
+};
