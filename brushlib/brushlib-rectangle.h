@@ -18,7 +18,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#if !defined(__BRUSHLIB_H_INSIDE__) && !defined (BRUSHLIB_COMPILATION)
+#if !defined (__BRUSHLIB_H_INSIDE__) && !defined (BRUSHLIB_COMPILATION)
 #error "Only <brushlib/brushlib.h> can be included directly."
 #endif
 
@@ -30,8 +30,8 @@
 
 G_BEGIN_DECLS
 
-#define BRUSHLIB_TYPE_RECTANGLE                (brushlib_rectangle_get_type())
-#define BRUSHLIB_VALUE_HOLDS_RECTANGLE(value)  (G_TYPE_CHECK_VALUE_TYPE((value), BRUSHLIB_TYPE_RECTANGLE))
+#define BRUSHLIB_TYPE_RECTANGLE                (brushlib_rectangle_get_type ())
+#define BRUSHLIB_VALUE_HOLDS_RECTANGLE (value)  (G_TYPE_CHECK_VALUE_TYPE ((value), BRUSHLIB_TYPE_RECTANGLE))
 
 GType              brushlib_rectangle_get_type (void) G_GNUC_CONST;
 BrushLibRectangle *brushlib_rectangle_copy     (const BrushLibRectangle *rectangle);

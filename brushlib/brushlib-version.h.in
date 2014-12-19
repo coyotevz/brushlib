@@ -16,7 +16,7 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#if !defined(__BRUSHLIB_H_INSIDE__) && !defined (BRUSHLIB_COMPILATION)
+#if !defined (__BRUSHLIB_H_INSIDE__) && !defined (BRUSHLIB_COMPILATION)
 #error "Only <brushlib/brushlib.h> can be included directly."
 #endif
 
@@ -33,7 +33,7 @@
                                    (BRUSHLIB_MINOR_VERSION << 16) | \
                                    (BRUSHLIB_MICRO_VERSION << 8))
 
-#define BRUSHLIB_CHECK_VERSION(major,minor,micro)    \
+#define BRUSHLIB_CHECK_VERSION (major,minor,micro)    \
   (BRUSHLIB_MAJOR_VERSION > (major) ||               \
    (BRUSHLIB_MAJOR_VERSION == (major) &&             \
     BRUSHLIB_MINOR_VERSION > (minor)) ||             \

@@ -34,7 +34,7 @@
  * Return value: an allocated copy of @rectangle.
  */
 BrushLibRectangle *
-brushlib_rectangle_copy(const BrushLibRectangle *rectangle)
+brushlib_rectangle_copy (const BrushLibRectangle *rectangle)
 {
   g_return_val_if_fail (rectangle != NULL, NULL);
   return g_slice_dup (BrushLibRectangle, rectangle);
@@ -47,7 +47,7 @@ brushlib_rectangle_copy(const BrushLibRectangle *rectangle)
  * Frees a rectangle structure created with brushlib_rectangle_copy().
  */
 void
-brushlib_rectangle_free(BrushLibRectangle *rectangle)
+brushlib_rectangle_free (BrushLibRectangle *rectangle)
 {
   g_return_if_fail (rectangle != NULL);
   g_slice_free (BrushLibRectangle, rectangle);
