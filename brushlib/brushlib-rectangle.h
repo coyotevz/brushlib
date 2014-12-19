@@ -34,6 +34,9 @@ G_BEGIN_DECLS
 #define BRUSHLIB_VALUE_HOLDS_RECTANGLE (value)  (G_TYPE_CHECK_VALUE_TYPE ((value), BRUSHLIB_TYPE_RECTANGLE))
 
 GType              brushlib_rectangle_get_type (void) G_GNUC_CONST;
+BrushLibRectangle *brushlib_rectangle_new      (const gint x, const gint y,
+                                                const guint width,
+                                                const guint height);
 BrushLibRectangle *brushlib_rectangle_copy     (const BrushLibRectangle *rectangle);
 void               brushlib_rectangle_free     (BrushLibRectangle       *rectangle);
 void               brushlib_rectangle_expand   (BrushLibRectangle       *self,

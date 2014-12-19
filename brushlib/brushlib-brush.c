@@ -116,5 +116,5 @@ brush_test_method_impl (BrushLibBrush *brush)
 {
   BrushLibBrushPrivate *priv = BRUSHLIB_BRUSH_GET_PRIVATE (brush);
 
-  g_message ("Default implementation for test_method() id = %s", priv->id);
+  g_print ("Default implementation for test_method() id = %d\n", priv->id);
 }

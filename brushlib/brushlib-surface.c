@@ -141,6 +141,7 @@ surface_draw_dab_impl (BrushLibSurface     *surface,
                        const BrushLibColor *color,
                        const BrushLibBrush *brush)
 {
-  g_message("Default implementation for surface_draw_dab()");
+  BrushLibSurfacePrivate *priv = BRUSHLIB_SURFACE_GET_PRIVATE (surface);
+  g_print ("Default implementation for surface_draw_dab() id = %d\n", priv->id);
   return 0;
 };

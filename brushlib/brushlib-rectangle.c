@@ -25,6 +25,31 @@
 #include "brushlib-rectangle.h"
 
 /**
+ * brushlib_rectangle_new: (constructor)
+ * @x: x origin component
+ * @y: y origin component
+ * @width: width of rectangle
+ * @height: height of rectangle
+ *
+ * Returns: (transfer full): new rectangle
+ */
+BrushLibRectangle *
+brushlib_rectangle_new (const gint x, const gint y,
+                        const guint width, const guint height)
+{
+  BrushLibRectangle *rectangle;
+
+  rectangle = g_slice_new (BrushLibRectangle);
+
+  rectangle->x = x;
+  rectangle->y = y;
+  rectangle->width = width;
+  rectangle->height = height;
+
+  return rectangle;
+}
+
+/**
  * brushlib_rectangle_copy:
  * @rectangle: a #BrushLibRectangle
  *
@@ -41,7 +66,7 @@ brushlib_rectangle_copy (const BrushLibRectangle *rectangle)
 }
 
 /**
- * brushlib_rectangle_free:
+ * brushlib_rectangle_free: (skip)
  * @rectangle: a #BrushLibRectangle
  *
  * Frees a rectangle structure created with brushlib_rectangle_copy().

@@ -28,14 +28,12 @@
 
 G_BEGIN_DECLS
 
-#define BRUSHLIB_TYPE_BRUSH \
-  (brushlib_brush_get_type ())
-#define BRUSHLIB_BRUSH(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj), BRUSHLIB_TYPE_BRUSH, BrushLibBrush))
-#define BRUSHLIB_BRUSH_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BRUSHLIB_TYPE_BRUSH))
-#define BRUSHLIB_BRUSH_GET_CLASS(obj) \
-  (G_TYPE_INStANCE_GET_CLASS ((obj), BRUSHLIB_TYPE_BRUSH, BrushLibBrushClass))
+#define BRUSHLIB_TYPE_BRUSH            (brushlib_brush_get_type ())
+#define BRUSHLIB_BRUSH(obj)            (G_TYPE_CHECK_INSTANCE_CAST ((obj), BRUSHLIB_TYPE_BRUSH, BrushLibBrush))
+#define BRUSHLIB_BRUSH_CLASS(klass)    (G_TYPE_CHECK_CLASS_CAST ((klass), BRUSHLIB_TYPE_BRUSH))
+#define BRUSHLIB_IS_BRUSH(obj)         (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BRUSHLIB_TYPE_BRUSH))
+#define BRUSHLIB_IS_BRUSH_CLASS(klass) (G_TYPE_CHECK_CLASS_TYPE ((klass), BRUSHLIB_TYPE_BRUSH))
+#define BRUSHLIB_BRUSH_GET_CLASS(obj)  (G_TYPE_INSTANCE_GET_CLASS ((obj), BRUSHLIB_TYPE_BRUSH, BrushLibBrushClass))
 
 
 /* BrushLibBrush alias is defined in brushlib-types.h */

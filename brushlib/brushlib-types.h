@@ -47,8 +47,8 @@ struct _BrushLibRectangle
 {
   gint x;
   gint y;
-  gint width;
-  gint height;
+  guint width;
+  guint height;
 };
 
 /**
