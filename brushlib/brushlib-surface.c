@@ -25,35 +25,91 @@ static guint32 __id = 0;
 #define BRUSHLIB_SURFACE_GET_PRIVATE(w) \
   (G_TYPE_INSTANCE_GET_PRIVATE((w), BRUSHLIB_TYPE_SURFACE, BrushLibSurfacePrivate))
 
+typedef struct _BrushLibSurfacePrivate BrushLibSurfacePrivate;
+
 struct _BrushLibSurfacePrivate
 {
   guint32 id;
 };
 
 
+/* --- properties --- */
+enum {
+  PROP_0,
+
+  PROP_COLOR,
+};
+
+
+/* --- signals --- */
+enum {
+  FULLSCREEN,
+
+  LAST_SIGNAL
+};
+
+
+static guint           surface_signals[LAST_SIGNAL] = { 0, };
+
+
 /* --- functions --- */
-GType
-brushlib_surface_get_type(void)
+
+G_DEFINE_TYPE (BrushLibSurface, brushlib_surface, G_TYPE_OBJECT);
+
+static void
+brushlib_surface_set_property(GObject       *object,
+                              guint          prop_id,
+                              const GValue  *value,
+                              GParamSpec    *pspec)
 {
-  static GType surface_type = 0;
-  if (G_UNLIKELY(surface_type == 0))
-  {
-    const GTypeInfo surface_info = {
-      sizeof(BrushLibSurfaceClass), /* class_size */
-      NULL, /* base_init */
-      NULL, /* base_finalize */
-      NULL, /* class_init */
-      NULL, /* class_finalize */
-      NULL, /* class_data */
-      sizeof(BrushLibSurface), /* isntance_size */
-      0, /* n_preallocs */
-      NULL, /* instance_init */
-      NULL, /* value_table */
-    };
+  BrushLibSurface *surface;
+  BrushLibSurfacePrivate *priv;
 
-    surface_type = g_type_register_static(G_TYPE_OBJECT, "BrushLibSurface",
-                                          &surface_info, 0/*G_TYPE_FLAGS_ABSTRACT*/);
-  }
+  surface = BRUSHLIB_SURFACE(object);
+  priv = BRUSHLIB_SURFACE_GET_PRIVATE(surface);
+};
 
-  return surface_type;
+static void
+brushlib_surface_get_property(GObject       *object,
+                              guint          prop_id,
+                              GValue        *value,
+                              GParamSpec    *pspec)
+{
+  BrushLibSurface *surface;
+  BrushLibSurfacePrivate *priv;
+
+  surface = BRUSHLIB_SURFACE(object);
+  priv = BRUSHLIB_SURFACE_GET_PRIVATE(surface);
+};
+
+static void
+brushlib_surface_class_init(BrushLibSurfaceClass *klass)
+{
+  GObjectClass *gobject_class = G_OBJECT_CLASS(klass);
+
+  gobject_class->set_property = brushlib_surface_set_property;
+  gobject_class->get_property = brushlib_surface_get_property;
+
+  klass->draw_dab = brushlib_surface_draw_dab;
+  klass->get_color = brushlib_surface_get_color;
+  klass->get_alpha = brushlib_surface_get_alpha;
+  klass->save_png = brushlib_surface_save_png;
+  klass->begin_atomic = brushlib_surface_begin_atomic;
+  klass->end_atomic = brushlib_surface_end_atomic;
+
+  brushlib_surface_parent_class = g_type_class_peek_parent(klass);
+
+  g_type_class_add_private(klass, sizeof(BrushLibSurfacePrivate));
+
+  /* TODO: install properties */
+
+  /* TODO: add signals */
+}
+
+static void
+brushlib_surface_init (BrushLibSurface *surface)
+{
+  BrushLibSurfacePrivate *priv = BRUSHLIB_SURFACE_GET_PRIVATE(surface);
+
+  priv->id = __id++;
 }

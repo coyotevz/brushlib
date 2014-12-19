@@ -33,7 +33,7 @@ G_BEGIN_DECLS
 #define BRUSHLIB_TYPE_SURFACE \
   (brushlib_surface_get_type())
 #define BRUSHLIB_SURFACE(obj) \
-  (G_TYPE_CHECK_INSTANCE_CAST((obj), BRUSHLB_TYPE_SURFACE, BrushLibSurface))
+  (G_TYPE_CHECK_INSTANCE_CAST((obj), BRUSHLIB_TYPE_SURFACE, BrushLibSurface))
 #define BRUSHLIB_SURFACE_CLASS(klass) \
   (G_TYPE_CHECK_CLASS_CAST((klass), BRUSHLIB_TYPE_SURFACE, BrushLibSurfaceClass))
 #define BRUSHLIB_IS_SURFACE(obj) \
@@ -46,8 +46,6 @@ G_BEGIN_DECLS
 
 /* BrushLibSurface alias is defined in brushlib-types.h */
 typedef struct _BrushLibSurfaceClass    BrushLibSurfaceClass;
-typedef struct _BrushLibSurfacePrivate  BrushLibSurfacePrivate;
-
 
 /**
  * BrushLibSurface:
@@ -62,8 +60,6 @@ struct _BrushLibSurface
 
   /*< public >*/
   guint32 flags;
-
-  BrushLibSurfacePrivate *priv;
 };
 
 /**
