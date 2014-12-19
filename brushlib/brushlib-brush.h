@@ -33,16 +33,16 @@ G_BEGIN_DECLS
 #define BRUSHLIB_BRUSH(obj) \
   (G_TYPE_CHECK_INSTANCE_CAST ((obj), BRUSHLIB_TYPE_BRUSH, BrushLibBrush))
 #define BRUSHLIB_BRUSH_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_CAST ((klass), BRUSHLIB_TYPE_BRUSH, BrushLibClass))
+  (G_TYPE_CHECK_CLASS_CAST ((klass), BRUSHLIB_TYPE_BRUSH))
 #define BRUSHLIB_BRUSH_GET_CLASS(obj) \
-  (G_TYPE_INStANCE_GET_CLASS ((obj), BRUSHLIB_TYPE_SURFACE, BrushLibSurfaceClass))
+  (G_TYPE_INStANCE_GET_CLASS ((obj), BRUSHLIB_TYPE_BRUSH, BrushLibBrushClass))
 
 
 /* BrushLibBrush alias is defined in brushlib-types.h */
 typedef struct _BrushLibBrushClass BrushLibBrushClass;
 
 
-typedef struct _BrushLibBrush
+struct _BrushLibBrush
 {
   /*< private >*/
   GObject parent_instance;
@@ -51,7 +51,7 @@ typedef struct _BrushLibBrush
   guint32 flags;
 };
 
-typedef struct _BrushLibBrushClass
+struct _BrushLibBrushClass
 {
   /*< private >*/
   GObjectClass parent_class;
@@ -61,8 +61,9 @@ typedef struct _BrushLibBrushClass
 };
 
 
-GType   brushlib_brush_get_type     (void) G_GNUC_CONST;
-void    brushlib_brush_test_method  (BrushLibBrush *brush);
+GType           brushlib_brush_get_type     (void) G_GNUC_CONST;
+BrushLibBrush * brushlib_brush_new          (GType type);
+void            brushlib_brush_test_method  (BrushLibBrush *brush);
 
 G_END_DECLS
 

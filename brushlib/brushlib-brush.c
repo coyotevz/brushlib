@@ -16,11 +16,6 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-
 #include "brushlib-brush.h"
 
 static guint32 __id = 0;
@@ -30,9 +25,29 @@ static guint32 __id = 0;
 
 typedef struct _BrushLibBrushPrivate BrushLibBrushPrivate;
 
-struct _BrushLibBrushPrivate {
+struct _BrushLibBrushPrivate
+{
   guint32 id;
 };
+
+/* --- properties --- */
+enum {
+  PROP_0,
+
+  PROP_RADIUS,
+};
+
+/* --- signals --- */
+enum {
+  STROKE,
+
+  LAST_SIGNAL
+};
+
+/* --- prototypes --- */
+static void brush_test_method_impl (BrushLibBrush *brush);
+
+static guint brush_signals[LAST_SIGNAL] = { 0, };
 
 G_DEFINE_TYPE (BrushLibBrush, brushlib_brush, G_TYPE_OBJECT);
 
@@ -46,7 +61,7 @@ brushlib_brush_set_property (GObject      *object,
   BrushLibBrushPrivate *priv;
 
   brush = BRUSHLIB_BRUSH (object);
-  priv = BRUSHLIB_BURSH_GET_PRIVATE (brush);
+  priv = BRUSHLIB_BRUSH_GET_PRIVATE (brush);
 }
 
 static void
@@ -59,7 +74,7 @@ brushlib_brush_get_property (GObject    *object,
   BrushLibBrushPrivate *priv;
 
   brush = BRUSHLIB_BRUSH (object);
-  priv = BRUSHLIB_BURSH_GET_PRIVATE (brush);
+  priv = BRUSHLIB_BRUSH_GET_PRIVATE (brush);
 }
 
 static void
@@ -69,6 +84,8 @@ brushlib_brush_class_init (BrushLibBrushClass *klass)
 
   gobject_class->set_property = brushlib_brush_set_property;
   gobject_class->get_property = brushlib_brush_get_property;
+
+  klass->test_method = brush_test_method_impl;
 
   brushlib_brush_parent_class = g_type_class_peek_parent (klass);
 
@@ -82,4 +99,22 @@ static void
 brushlib_brush_init (BrushLibBrush *brush)
 {
   BrushLibBrushPrivate *priv = BRUSHLIB_BRUSH_GET_PRIVATE (brush);
+
+  priv->id = __id++;
+}
+
+void
+brushlib_brush_test_method (BrushLibBrush *brush)
+{
+  g_return_if_fail (BRUSHLIB_IS_BRUSH (brush));
+  return BRUSHLIB_BRUSH_GET_CLASS (brush)->test_method (brush);
+}
+
+/* --- default implementation --- */
+static void
+brush_test_method_impl (BrushLibBrush *brush)
+{
+  BrushLibBrushPrivate *priv = BRUSHLIB_BRUSH_GET_PRIVATE (brush);
+
+  g_message ("Default implementation for test_method() id = %s", priv->id);
 }

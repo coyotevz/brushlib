@@ -9,6 +9,7 @@ def build(bld):
     brushlib-main.h
     brushlib-rectangle.h
     brushlib-surface.h
+    brushlib-brush.h
     brushlib-version.h
     """
 
