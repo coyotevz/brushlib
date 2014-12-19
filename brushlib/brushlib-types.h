@@ -34,22 +34,6 @@ typedef struct _BrushLibPoint       BrushLibPoint;
 typedef struct _BrushLibColor       BrushLibColor;
 typedef struct _BrushLibBrush       BrushLibBrush;
 
-
-/**
- * BrushLibPoint:
- * @x: x coordinate
- * @y: y coordinate
- * @radius: radius of point
- *
- * Point with radius representation.
- */
-struct _BrushLibPoint
-{
-  gint   x;
-  gint   y;
-  gfloat radius;
-};
-
 /**
  * BrushLibRectangle:
  * @x: x origin component
@@ -67,7 +51,36 @@ struct _BrushLibRectangle
   gint height;
 };
 
+/**
+ * BrushLibPoint:
+ * @x: x coordinate
+ * @y: y coordinate
+ * @radius: radius of point
+ *
+ * Point with radius representation.
+ */
+struct _BrushLibPoint
+{
+  gint   x;
+  gint   y;
+  gfloat radius;
+};
+
+/**
+ * BrushLibColor:
+ * @r: red component
+ * @g: green component
+ * @b: blue component
+ *
+ * Color representation
+ */
+struct _BrushLibColor
+{
+  guint16 r;
+  guint16 g;
+  guint16 b;
+};
+
 G_END_DECLS
 
 #endif /* __BRUSHLIB_TYPES_H__ */
-

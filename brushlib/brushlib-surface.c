@@ -74,7 +74,7 @@ brushlib_surface_set_property (GObject       *object,
 
   surface = BRUSHLIB_SURFACE (object);
   priv = BRUSHLIB_SURFACE_GET_PRIVATE (surface);
-};
+}
 
 static void
 brushlib_surface_get_property (GObject       *object,
@@ -87,7 +87,7 @@ brushlib_surface_get_property (GObject       *object,
 
   surface = BRUSHLIB_SURFACE (object);
   priv = BRUSHLIB_SURFACE_GET_PRIVATE (surface);
-};
+}
 
 static void
 brushlib_surface_class_init (BrushLibSurfaceClass *klass)
@@ -121,10 +121,11 @@ brushlib_surface_init (BrushLibSurface *surface)
   priv->id = __id++;
 }
 
-guint brushlib_surface_draw_dab (BrushLibSurface     *surface,
-                                 const BrushLibPoint *point,
-                                 const BrushLibColor *color,
-                                 const BrushLibBrush *brush)
+guint
+brushlib_surface_draw_dab (BrushLibSurface     *surface,
+                           const BrushLibPoint *point,
+                           const BrushLibColor *color,
+                           const BrushLibBrush *brush)
 {
   g_return_if_fail (BRUSHLIB_IS_SURFACE (surface));
   return BRUSHLIB_SURFACE_GET_CLASS(surface)->draw_dab(surface,

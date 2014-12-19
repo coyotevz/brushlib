@@ -18,12 +18,12 @@
  * OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
  */
 
+#ifndef __BRUSHLIB_SURFACE_H__
+#define __BRUSHLIB_SURFACE_H__
+
 #if !defined (__BRUSHLIB_H_INSIDE__) && !defined (BRUSHLIB_COMPILATION)
 #error "Only <brushlib/brushlib.h> can be included directly."
 #endif
-
-#ifndef __BRUSHLIB_SURFACE_H__
-#define __BRUSHLIB_SURFACE_H__
 
 #include <glib-object.h>
 #include <brushlib/brushlib-types.h>
@@ -39,7 +39,7 @@ G_BEGIN_DECLS
 #define BRUSHLIB_IS_SURFACE(obj) \
   (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BRUSHLIB_TYPE_SURFACE))
 #define BRUSHLIB_IS_SURFACE_CLASS(klass) \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), BRUSHLIB_TYPE_SURAFCE))
+  (G_TYPE_CHECK_CLASS_TYPE ((klass), BRUSHLIB_TYPE_SURFACE))
 #define BRUSHLIB_SURFACE_GET_CLASS(obj) \
   (G_TYPE_INSTANCE_GET_CLASS ((obj), BRUSHLIB_TYPE_SURFACE, BrushLibSurfaceClass))
 
