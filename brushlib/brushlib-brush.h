@@ -55,13 +55,13 @@ struct _BrushLibBrushClass
   GObjectClass parent_class;
 
   /* basic methods */
-  void      (* test_method)       (BrushLibBrush *brush);
+  void      (* reset)       (BrushLibBrush *brush);
 };
 
 
 GType           brushlib_brush_get_type     (void) G_GNUC_CONST;
 BrushLibBrush * brushlib_brush_new          (GType type);
-void            brushlib_brush_test_method  (BrushLibBrush *brush);
+void            brushlib_brush_reset        (BrushLibBrush *brush);
 
 G_END_DECLS
 

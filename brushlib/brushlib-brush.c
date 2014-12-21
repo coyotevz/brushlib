@@ -45,7 +45,7 @@ enum {
 };
 
 /* --- prototypes --- */
-static void brush_test_method_impl (BrushLibBrush *brush);
+static void brush_reset_impl (BrushLibBrush *brush);
 
 static guint brush_signals[LAST_SIGNAL] = { 0, };
 
@@ -85,7 +85,7 @@ brushlib_brush_class_init (BrushLibBrushClass *klass)
   gobject_class->set_property = brushlib_brush_set_property;
   gobject_class->get_property = brushlib_brush_get_property;
 
-  klass->test_method = brush_test_method_impl;
+  klass->reset = brush_reset_impl;
 
   brushlib_brush_parent_class = g_type_class_peek_parent (klass);
 
@@ -104,17 +104,17 @@ brushlib_brush_init (BrushLibBrush *brush)
 }
 
 void
-brushlib_brush_test_method (BrushLibBrush *brush)
+brushlib_brush_reset (BrushLibBrush *brush)
 {
   g_return_if_fail (BRUSHLIB_IS_BRUSH (brush));
-  return BRUSHLIB_BRUSH_GET_CLASS (brush)->test_method (brush);
+  return BRUSHLIB_BRUSH_GET_CLASS (brush)->reset (brush);
 }
 
 /* --- default implementation --- */
 static void
-brush_test_method_impl (BrushLibBrush *brush)
+brush_reset_impl (BrushLibBrush *brush)
 {
   BrushLibBrushPrivate *priv = BRUSHLIB_BRUSH_GET_PRIVATE (brush);
 
-  g_print ("Default implementation for test_method() id = %d\n", priv->id);
+  g_print ("Default implementation for reset() id = %d\n", priv->id);
 }
