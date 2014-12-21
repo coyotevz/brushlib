@@ -103,6 +103,15 @@ brushlib_brush_init (BrushLibBrush *brush)
   priv->id = __id++;
 }
 
+/**
+ * brushlib_brush_reset:
+ *
+ * Reset the current brush engine state.
+ * Used when the next brushlib_brush_stroke_to() call is not related to the
+ * current state.
+ * Note that the reset request is queued and changes in state will only happen
+ * on next_stroke_to().
+ */
 void
 brushlib_brush_reset (BrushLibBrush *brush)
 {
@@ -114,7 +123,5 @@ brushlib_brush_reset (BrushLibBrush *brush)
 static void
 brush_reset_impl (BrushLibBrush *brush)
 {
-  BrushLibBrushPrivate *priv = BRUSHLIB_BRUSH_GET_PRIVATE (brush);
-
-  g_print ("Default implementation for reset() id = %d\n", priv->id);
+  brush->reset_requested = TRUE;
 }
