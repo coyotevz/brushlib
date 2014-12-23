@@ -11,6 +11,9 @@ class PenInfo(object):
 
 class Brush(object):
 
+    def new(self):
+        pass
+
     def reset(self):
         pass
 
@@ -36,4 +39,28 @@ class Brush(object):
         pass
 
     def get_mapping_n(self, id: BrushSetting, input: BrushInput):
+        pass
+
+    def set_mapping_point(self, id: BrushSetting, input: BrushInput, index: int, x, y):
+        pass
+
+    def get_mapping_point(self, id: BrushSetting, input: BrushInput, index: int, x, y):
+        pass
+
+    def set_state(self, i: BrushState, value):
+        pass
+
+    def get_state(self, i: BrushState):
+        pass
+
+    def get_total_stroke_painting_time(self):
+        pass
+
+    def set_print_inputs(self, enabled: boolean):
+        pass
+
+    def from_defults(self):
+        pass
+
+    def from_string(self, string: const char):
         pass
