@@ -28,11 +28,12 @@
 G_BEGIN_DECLS
 
 /* Forward declarations to avoid header catch */
-typedef struct _BrushLibSurface     BrushLibSurface;
-typedef struct _BrushLibRectangle   BrushLibRectangle;
-typedef struct _BrushLibPoint       BrushLibPoint;
-typedef struct _BrushLibColor       BrushLibColor;
-typedef struct _BrushLibBrush       BrushLibBrush;
+typedef struct _BrushLibSurface      BrushLibSurface;
+typedef struct _BrushLibTiledSurface BrushLibTiledSurface;
+typedef struct _BrushLibRectangle    BrushLibRectangle;
+typedef struct _BrushLibPoint        BrushLibPoint;
+typedef struct _BrushLibColor        BrushLibColor;
+typedef struct _BrushLibBrush        BrushLibBrush;
 
 /**
  * BrushLibRectangle:

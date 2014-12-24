@@ -46,6 +46,31 @@ G_BEGIN_DECLS
 /* BrushLibTiledSurface alias is defined in brushlib-types.h */
 typedef struct _BrushLibTiledSurfaceClass  BrushLibTiledSurfaceClass;
 
+/**
+ * BurshLibTiledSurface:
+ *
+ * TODO: Write docs.
+ */
+struct _BrushLibTiledSurface
+{
+  /*< private >*/
+  BrushLibSurface parent_instance;
+
+  /*< public >*/
+  guint32 flags;
+};
+
+/**
+ * BrushLibTiledSurfaceClass:
+ */
+struct _BrushLibTiledSurfaceClass
+{
+  /*< private >*/
+  BrushLibSurfaceClass parent_class;
+
+  /* TODO: write methods */
+};
+
 G_END_DECLS
 
 #endif /* __BRUSHLIB_TILED_SURFACE_H__ */
