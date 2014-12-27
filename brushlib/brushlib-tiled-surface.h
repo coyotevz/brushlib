@@ -24,7 +24,7 @@
 #error "Only <brushlib/brushlib.h> can be included directly."
 #endif
 
-#include <glib-gobject.h>
+#include <glib-object.h>
 #include <brushlib/brushlib-types.h>
 #include <brushlib/brushlib-surface.h>
 
@@ -68,8 +68,25 @@ struct _BrushLibTiledSurfaceClass
   /*< private >*/
   BrushLibSurfaceClass parent_class;
 
-  /* TODO: write methods */
+  /* methods */
+  void  (* set_symmetry_state)      (BrushLibTiledSurface *tsurface,
+                                     const gboolean        active,
+                                     const gint            center_x);
+  void  (* tile_request_start)      (BrushLibTiledSurface *tsurface,
+                                   /*TileRequest           request*/);
+  void  (* tile_request_end)        (BrushLibTiledSurface *tsurface,
+                                   /*TileRequest           request*/);
 };
+
+GType                  brushlib_tiled_surface_get_type           (void) G_GNUC_CONST;
+BrushLibTiledSurface * brushlib_tiled_surface_new                (void);
+void                   brushlib_tiled_surface_set_symmetry_state (BrushLibTiledSurface *tsurface,
+                                                                  const gboolean        active,
+                                                                  const gint            center_x);
+void                   brushlib_tiled_surface_tile_request_start (BrushLibTiledSurface *tsurface,
+                                                                /*TileRequest           request*/);
+void                   brushlib_tiled_surface_tile_request_end   (BrushLibTiledSurface *tsurface,
+                                                                /*TileRequest           request*/);
 
 G_END_DECLS
 

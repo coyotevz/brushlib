@@ -9,6 +9,7 @@ def build(bld):
     brushlib-main.h
     brushlib-rectangle.h
     brushlib-surface.h
+    brushlib-tiled-surface.h
     brushlib-brush.h
     brushlib-version.h
     """
@@ -37,6 +38,7 @@ def build(bld):
         brushlib-main.c
         brushlib-rectangle.c
         brushlib-surface.c
+        brushlib-tiled-surface.c
         """
 
         gir = bld(

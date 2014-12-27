@@ -46,7 +46,8 @@ struct _BrushLibBrush
   GObject parent_instance;
 
   /*< public >*/
-  guint32 flags;
+  guint32  flags;
+  gboolean reset_requested;
 };
 
 struct _BrushLibBrushClass
