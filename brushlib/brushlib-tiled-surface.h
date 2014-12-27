@@ -72,10 +72,8 @@ struct _BrushLibTiledSurfaceClass
   void  (* set_symmetry_state)      (BrushLibTiledSurface *tsurface,
                                      const gboolean        active,
                                      const gint            center_x);
-  void  (* tile_request_start)      (BrushLibTiledSurface *tsurface,
-                                   /*TileRequest           request*/);
-  void  (* tile_request_end)        (BrushLibTiledSurface *tsurface,
-                                   /*TileRequest           request*/);
+  void  (* tile_request_start)      (BrushLibTiledSurface *tsurface);
+  void  (* tile_request_end)        (BrushLibTiledSurface *tsurface);
 };
 
 GType                  brushlib_tiled_surface_get_type           (void) G_GNUC_CONST;
@@ -83,10 +81,8 @@ BrushLibTiledSurface * brushlib_tiled_surface_new                (void);
 void                   brushlib_tiled_surface_set_symmetry_state (BrushLibTiledSurface *tsurface,
                                                                   const gboolean        active,
                                                                   const gint            center_x);
-void                   brushlib_tiled_surface_tile_request_start (BrushLibTiledSurface *tsurface,
-                                                                /*TileRequest           request*/);
-void                   brushlib_tiled_surface_tile_request_end   (BrushLibTiledSurface *tsurface,
-                                                                /*TileRequest           request*/);
+void                   brushlib_tiled_surface_tile_request_start (BrushLibTiledSurface *tsurface);
+void                   brushlib_tiled_surface_tile_request_end   (BrushLibTiledSurface *tsurface);
 
 G_END_DECLS
 

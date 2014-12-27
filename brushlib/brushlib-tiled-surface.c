@@ -22,7 +22,7 @@
 static guint32 __id = 0;
 
 #define BRUSHLIB_TILED_SURFACE_GET_PRIVATE(w) \
-  (G_TYPE_INSTANCE_GET_PRIVATE ((w), BRUSHLIB_TYPE_TILED_SURFACE, BrushLibTiledSurfacePrivaet))
+  (G_TYPE_INSTANCE_GET_PRIVATE ((w), BRUSHLIB_TYPE_TILED_SURFACE, BrushLibTiledSurfacePrivate))
 
 typedef struct _BrushLibTiledSurfacePrivate BrushLibTiledSurfacePrivate;
 
@@ -34,10 +34,10 @@ struct _BrushLibTiledSurfacePrivate
 
 /* --- functions --- */
 
-G_DEFINE_TYPE (BrushLibTiledSurface, brushlib_surface, BRUSHLIB_TYPE_SURFACE);
+G_DEFINE_TYPE (BrushLibTiledSurface, brushlib_tiled_surface, BRUSHLIB_TYPE_SURFACE);
 
 static void
-tiled_surface_get_property  (GObject       *object,
+tiled_surface_set_property  (GObject       *object,
                              guint          prop_id,
                              const GValue  *value,
                              GParamSpec    *pspec)
@@ -50,7 +50,7 @@ tiled_surface_get_property  (GObject       *object,
 }
 
 static void
-tiled_surface_set_property  (GObject       *object,
+tiled_surface_get_property  (GObject       *object,
                              guint          prop_id,
                              GValue        *value,
                              GParamSpec    *pspec)
@@ -70,7 +70,7 @@ tiled_surface_get_alpha (const BrushLibSurface *surface,
 }
 
 static void
-brushlib_tiled_surface_class_init (BrushLibTiledSurface *klass)
+brushlib_tiled_surface_class_init (BrushLibTiledSurfaceClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
   BrushLibSurfaceClass *surface_class = BRUSHLIB_SURFACE_CLASS (klass);
@@ -88,5 +88,5 @@ static void
 brushlib_tiled_surface_init (BrushLibTiledSurface *tsurface)
 {
   BrushLibTiledSurfacePrivate *priv = BRUSHLIB_TILED_SURFACE_GET_PRIVATE (tsurface);
-  priv->id = __id+;
+  priv->id = __id++;
 }
