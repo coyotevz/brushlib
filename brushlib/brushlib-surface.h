@@ -56,7 +56,9 @@ typedef struct _BrushLibSurfaceClass    BrushLibSurfaceClass;
 struct _BrushLibSurface
 {
   /*< private >*/
-  GObject parent_instance;
+  GObject  parent_instance;
+  gboolean do_symmetry;
+  gfloat   symmetry_x;
 
   /*< public >*/
   guint32 flags;
@@ -71,6 +73,9 @@ struct _BrushLibSurfaceClass
   GObjectClass parent_class;
 
   /* basic methods */
+  void  (* set_symmetry_state)  (BrushLibSurface         *surface,
+                                 const gboolean           active,
+                                 const gint               center_x);
   guint   (* draw_dab)          (BrushLibSurface         *surface,
                                  const BrushLibPoint     *point,
                                  const BrushLibColor     *color,
@@ -93,6 +98,9 @@ BrushLibSurface * brushlib_surface_new          (GType type,
                                                  const char *first_property_name,
                                                  ...);
 
+void              brushlib_surface_set_symmetry (BrushLibSurface         *surface,
+                                                const gboolean            active,
+                                                const gint                center_x);
 guint             brushlib_surface_draw_dab     (BrushLibSurface         *surface,
                                                  const BrushLibPoint     *point,
                                                  const BrushLibColor     *color,

@@ -119,6 +119,17 @@ brushlib_surface_init (BrushLibSurface *surface)
   priv->id = __id++;
 }
 
+void
+brushlib_surface_set_symmetry (BrushLibSurface *surface,
+                               const gboolean   active,
+                               const gint       center_x)
+{
+  g_return_if_fail (BRUSHLIB_IS_SURFACE (surface));
+
+  surface->do_symmetry = active;
+  surface->symmetry_x = center_x;
+}
+
 guint
 brushlib_surface_draw_dab (BrushLibSurface     *surface,
                            const BrushLibPoint *point,
