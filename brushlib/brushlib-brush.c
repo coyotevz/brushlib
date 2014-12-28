@@ -87,8 +87,6 @@ brushlib_brush_class_init (BrushLibBrushClass *klass)
 
   klass->reset = brush_reset_impl;
 
-  brushlib_brush_parent_class = g_type_class_peek_parent (klass);
-
   g_type_class_add_private (klass, sizeof (BrushLibBrushPrivate));
 
   /* TODO: install properties */

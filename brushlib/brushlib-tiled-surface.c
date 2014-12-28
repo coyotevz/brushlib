@@ -80,7 +80,6 @@ brushlib_tiled_surface_class_init (BrushLibTiledSurfaceClass *klass)
 
   surface_class->get_alpha = tiled_surface_get_alpha;
 
-  brushlib_tiled_surface_parent_class = g_type_class_peek_parent (klass);
   g_type_class_add_private (klass, sizeof (BrushLibTiledSurfacePrivate));
 }
 

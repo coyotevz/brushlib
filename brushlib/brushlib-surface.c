@@ -104,8 +104,6 @@ brushlib_surface_class_init (BrushLibSurfaceClass *klass)
   //klass->begin_atomic = surface_begin_atomic_impl;
   //klass->end_atomic = surface_end_atomic_impl;
 
-  brushlib_surface_parent_class = g_type_class_peek_parent (klass);
-
   g_type_class_add_private (klass, sizeof (BrushLibSurfacePrivate));
 
   /* TODO: install properties */
