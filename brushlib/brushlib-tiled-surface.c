@@ -37,10 +37,10 @@ struct _BrushLibTiledSurfacePrivate
 G_DEFINE_TYPE (BrushLibTiledSurface, brushlib_tiled_surface, BRUSHLIB_TYPE_SURFACE);
 
 static void
-tiled_surface_set_property  (GObject       *object,
-                             guint          prop_id,
-                             const GValue  *value,
-                             GParamSpec    *pspec)
+tiled_surface_set_property (GObject       *object,
+                            guint          prop_id,
+                            const GValue  *value,
+                            GParamSpec    *pspec)
 {
   BrushLibTiledSurface *tsurface;
   BrushLibTiledSurfacePrivate *priv;
@@ -50,10 +50,10 @@ tiled_surface_set_property  (GObject       *object,
 }
 
 static void
-tiled_surface_get_property  (GObject       *object,
-                             guint          prop_id,
-                             GValue        *value,
-                             GParamSpec    *pspec)
+tiled_surface_get_property (GObject       *object,
+                            guint          prop_id,
+                            GValue        *value,
+                            GParamSpec    *pspec)
 {
   BrushLibTiledSurface *tsurface;
   BrushLibTiledSurfacePrivate *priv;

@@ -52,10 +52,10 @@ static guint brush_signals[LAST_SIGNAL] = { 0, };
 G_DEFINE_TYPE (BrushLibBrush, brushlib_brush, G_TYPE_OBJECT);
 
 static void
-brushlib_brush_set_property (GObject      *object,
-                             guint         prop_id,
-                             const GValue *value,
-                             GParamSpec   *pspec)
+brush_set_property (GObject      *object,
+                    guint         prop_id,
+                    const GValue *value,
+                    GParamSpec   *pspec)
 {
   BrushLibBrush *brush;
   BrushLibBrushPrivate *priv;
@@ -65,10 +65,10 @@ brushlib_brush_set_property (GObject      *object,
 }
 
 static void
-brushlib_brush_get_property (GObject    *object,
-                             guint       prop_id,
-                             GValue     *value,
-                             GParamSpec *pspec)
+brush_get_property (GObject    *object,
+                    guint       prop_id,
+                    GValue     *value,
+                    GParamSpec *pspec)
 {
   BrushLibBrush *brush;
   BrushLibBrushPrivate *priv;
@@ -82,8 +82,8 @@ brushlib_brush_class_init (BrushLibBrushClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
-  gobject_class->set_property = brushlib_brush_set_property;
-  gobject_class->get_property = brushlib_brush_get_property;
+  gobject_class->set_property = brush_set_property;
+  gobject_class->get_property = brush_get_property;
 
   klass->reset = brush_reset_impl;
 

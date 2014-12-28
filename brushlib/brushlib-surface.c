@@ -64,10 +64,10 @@ static guint           surface_signals[LAST_SIGNAL] = { 0, };
 G_DEFINE_TYPE (BrushLibSurface, brushlib_surface, G_TYPE_OBJECT);
 
 static void
-brushlib_surface_set_property (GObject       *object,
-                               guint          prop_id,
-                               const GValue  *value,
-                               GParamSpec    *pspec)
+surface_set_property (GObject       *object,
+                      guint          prop_id,
+                      const GValue  *value,
+                      GParamSpec    *pspec)
 {
   BrushLibSurface *surface;
   BrushLibSurfacePrivate *priv;
@@ -77,10 +77,10 @@ brushlib_surface_set_property (GObject       *object,
 }
 
 static void
-brushlib_surface_get_property (GObject       *object,
-                               guint          prop_id,
-                               GValue        *value,
-                               GParamSpec    *pspec)
+surface_get_property (GObject       *object,
+                      guint          prop_id,
+                      GValue        *value,
+                      GParamSpec    *pspec)
 {
   BrushLibSurface *surface;
   BrushLibSurfacePrivate *priv;
@@ -94,8 +94,8 @@ brushlib_surface_class_init (BrushLibSurfaceClass *klass)
 {
   GObjectClass *gobject_class = G_OBJECT_CLASS (klass);
 
-  gobject_class->set_property = brushlib_surface_set_property;
-  gobject_class->get_property = brushlib_surface_get_property;
+  gobject_class->set_property = surface_set_property;
+  gobject_class->get_property = surface_get_property;
 
   klass->draw_dab = surface_draw_dab_impl;
   //klass->get_color = surface_get_color_impl;
