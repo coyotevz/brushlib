@@ -4,13 +4,13 @@ def build(bld):
     #print(bld.env)
 
     public_h = """
-    brushlib-types.h
+    brushlib-brush.h
     brushlib-debug.h
     brushlib-main.h
     brushlib-rectangle.h
     brushlib-surface.h
     brushlib-tiled-surface.h
-    brushlib-brush.h
+    brushlib-types.h
     brushlib-version.h
     """
 
@@ -35,6 +35,7 @@ def build(bld):
         bld.add_group()
 
         gir_sources = public_h + """
+        brushlib-brush.c
         brushlib-main.c
         brushlib-rectangle.c
         brushlib-surface.c
