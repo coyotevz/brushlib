@@ -72,6 +72,7 @@ struct _BrushLibPoint
  * @r: red component
  * @g: green component
  * @b: blue component
+ * @a: alpha component
  *
  * Color representation
  */
@@ -80,6 +81,7 @@ struct _BrushLibColor
   guint16 r;
   guint16 g;
   guint16 b;
+  guint16 a;
 };
 
 G_END_DECLS
