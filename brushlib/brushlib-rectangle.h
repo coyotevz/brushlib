@@ -31,7 +31,7 @@
 G_BEGIN_DECLS
 
 #define BRUSHLIB_TYPE_RECTANGLE                (brushlib_rectangle_get_type ())
-#define BRUSHLIB_VALUE_HOLDS_RECTANGLE (value)  (G_TYPE_CHECK_VALUE_TYPE ((value), BRUSHLIB_TYPE_RECTANGLE))
+#define BRUSHLIB_VALUE_HOLDS_RECTANGLE(value)  (G_TYPE_CHECK_VALUE_TYPE ((value), BRUSHLIB_TYPE_RECTANGLE))
 
 GType              brushlib_rectangle_get_type (void) G_GNUC_CONST;
 BrushLibRectangle *brushlib_rectangle_new      (const gint x, const gint y,

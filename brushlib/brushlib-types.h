@@ -33,6 +33,7 @@ typedef struct _BrushLibTiledSurface BrushLibTiledSurface;
 typedef struct _BrushLibRectangle    BrushLibRectangle;
 typedef struct _BrushLibPoint        BrushLibPoint;
 typedef struct _BrushLibColor        BrushLibColor;
+typedef struct _BrushLibMatrix       BrushLibMatrix;
 typedef struct _BrushLibBrush        BrushLibBrush;
 
 /**
@@ -82,6 +83,32 @@ struct _BrushLibColor
   guint16 g;
   guint16 b;
   guint16 a;
+};
+
+/**
+ * BrushLibMatrix:
+ * @xx: xx component of the affine transformation
+ * @yx: yx component of the affine transformation
+ * @xy: xy component of the affine transformation
+ * @yy: yy component of the affine transformation
+ * @x0: X translation component of the affine transformation
+ * @y0: Y translation component of the affine transformation
+ *
+ * A #BrushLibMatrix holds an affine transformation, such as a scale,
+ * rotation, shear, or a combination of those. The transformation of a point
+ * (x, y) is given by:
+ * <programlisting>
+ *     x_new = xx * x + xy * y + x0;
+ *     y_new = yx * x + yy * y + y0;
+ * </programlisting>
+ *
+ * See more at cairo_matrix_t
+ */
+struct _BrushLibMatrix
+{
+  double xx; double yx;
+  double xy; double yy;
+  double x0; double y0;
 };
 
 G_END_DECLS
