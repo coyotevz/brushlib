@@ -21,7 +21,13 @@
 
 #define __BRUSHLIB_H_INSIDE__
 
+#include <brushlib/brushlib-types.h>
 #include <brushlib/brushlib-main.h>
+#include <brushlib/brushlib-rectangle.h>
+#include <brushlib/brushlib-matrix.h>
+#include <brushlib/brushlib-brush.h>
+#include <brushlib/brushlib-surface.h>
+#include <brushlib/brushlib-tiled-surface.h>
 #include <brushlib/brushlib-version.h>
 #include <brushlib/brushlib-debug.h>
 

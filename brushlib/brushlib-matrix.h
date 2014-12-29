@@ -55,7 +55,7 @@ void            brushlib_matrix_scale           (BrushLibMatrix       *matrix,
 void            brushlib_matrix_rotate          (BrushLibMatrix       *matrix,
                                                  gdouble radians);
 
-void            brushlib_matrix_invert          (BrushLibMatrix       *matrix);
+BrushLibStatus  brushlib_matrix_invert          (BrushLibMatrix       *matrix);
 void            brushlib_matrix_multiply        (BrushLibMatrix       *result,
                                                  const BrushLibMatrix *a,
                                                  const BrushLibMatrix *b);

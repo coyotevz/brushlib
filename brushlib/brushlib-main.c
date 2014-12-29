@@ -160,8 +160,6 @@ BrushLibInitError
 brushlib_init (int    *argc,
                char ***argv)
 {
-  GError *error = NULL;
-
   if (brushlib_is_initialized)
     return BRUSHLIB_INIT_SUCCESS;
 

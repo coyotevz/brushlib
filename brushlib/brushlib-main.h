@@ -40,6 +40,27 @@ typedef enum {
   BRUSHLIB_INIT_ERROR_INTERNAL = -1,
 } BrushLibInitError;
 
+/**
+ * BrushLibStatus:
+ * @BRUSHLIB_STATUS_SUCCESS: no error has occurred
+ * @BRUSHLIB_STATUS_INVALID_MATRIX: invalid matrix (not invertible)
+ * @BRUSHLIB_STATUS_LAST_STATUS: this is a special value indicating the number
+ *    of status values defined in the enumeration.
+ *
+ * #BrushLibStatus is used to indicate errors that can occur when using
+ * BrushLib. In some cases it is returned directly by functions.
+ *
+ * Use brushlib_status_to_string() to get a human-readable representation of an
+ * error message.
+ */
+typedef enum {
+  BRUSHLIB_STATUS_SUCCESS = 0,
+
+  BRUSHLIB_STATUS_INVALID_MATRIX,
+
+  BRUSHLIB_STATUS_LAST_STATUS
+} BrushLibStatus;
+
 
 /* Initialization */
 BrushLibInitError     brushlib_init             (int            *argc,
