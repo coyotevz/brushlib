@@ -60,7 +60,7 @@ void            brushlib_matrix_multiply        (BrushLibMatrix       *result,
                                                  const BrushLibMatrix *a,
                                                  const BrushLibMatrix *b);
 void            brushlib_matrix_transform_distance (const BrushLibMatrix *matrix,
-                                                    gdouble dx, gdouble dy);
+                                                    gdouble *dx, gdouble *dy);
 void            brushlib_matrix_transform_point (const BrushLibMatrix *matrix,
                                                  gdouble *x, gdouble *y);
 

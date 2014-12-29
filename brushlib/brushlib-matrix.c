@@ -139,25 +139,6 @@ brushlib_matrix_rotate (BrushLibMatrix *matrix,
   brushlib_matrix_multiply (matrix, &tmp, matrix);
 }
 
-void
-brushlib_matrix_multiply (BrushLibMatrix       *result,
-                          const BrushLibMatrix *a,
-                          const BrushLibMatrix *b)
-{
-  BrushLibMatrix r;
-
-  r.xx = a->xx * b->xx + a->yx * b->xy;
-  r.yx = a->xx * b->yx + a->yx * b->yy;
-
-  r.xy = a->xy * b->xx + a->yy * b->xy;
-  r.yy = a->xy * b->yx + a->yy * b->yy;
-
-  r.x0 = a->x0 * b->xx + a->y0 * b->xy + b->x0;
-  r.y0 = a->x0 * b->yx + a->y0 * b->yy + b->y0;
-
-  *result = r;
-}
-
 BrushLibStatus
 brushlib_matrix_invert (BrushLibMatrix *matrix)
 {
@@ -197,6 +178,48 @@ brushlib_matrix_invert (BrushLibMatrix *matrix)
   matrix_scalar_multiply (matrix, 1 / det);
 
   return BRUSHLIB_STATUS_SUCCESS;
+}
+
+void
+brushlib_matrix_multiply (BrushLibMatrix       *result,
+                          const BrushLibMatrix *a,
+                          const BrushLibMatrix *b)
+{
+  BrushLibMatrix r;
+
+  r.xx = a->xx * b->xx + a->yx * b->xy;
+  r.yx = a->xx * b->yx + a->yx * b->yy;
+
+  r.xy = a->xy * b->xx + a->yy * b->xy;
+  r.yy = a->xy * b->yx + a->yy * b->yy;
+
+  r.x0 = a->x0 * b->xx + a->y0 * b->xy + b->x0;
+  r.y0 = a->x0 * b->yx + a->y0 * b->yy + b->y0;
+
+  *result = r;
+}
+
+void
+brushlib_matrix_transform_distance (const BrushLibMatrix *matrix,
+                                    gdouble *dx, gdouble *dy)
+{
+  gdouble new_x, new_y;
+
+  new_x = (matrix->xx * *dx + matrix->xy * *dy);
+  new_y = (matrix->xy * *dx + matrix->yy * *dy);
+
+  *dx = new_x;
+  *dy = new_y;
+}
+
+void
+brushlib_matrix_transform_point (const BrushLibMatrix *matrix,
+                                 gdouble *x, gdouble *y)
+{
+  brushlib_matrix_transform_distance (matrix, x, y);
+
+  *x += matrix->x0;
+  *y += matrix->y0;
 }
 
 static void
