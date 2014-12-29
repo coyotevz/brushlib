@@ -7,6 +7,7 @@ def build(bld):
     brushlib-brush.h
     brushlib-debug.h
     brushlib-main.h
+    brushlib-matrix.h
     brushlib-rectangle.h
     brushlib-surface.h
     brushlib-tiled-surface.h
@@ -37,6 +38,7 @@ def build(bld):
         gir_sources = public_h + """
         brushlib-brush.c
         brushlib-main.c
+        brushlib-matrix.c
         brushlib-rectangle.c
         brushlib-surface.c
         brushlib-tiled-surface.c
