@@ -26,7 +26,7 @@ def build(bld):
 
     brushlib = bld(
         features='c cshlib',
-        uselib='GLIB GOBJECT JSONC',
+        uselib='M GLIB GOBJECT JSONC',
         source=bld.path.ant_glob('*.c'),
         target='brushlib',
         includes='. ..',

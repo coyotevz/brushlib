@@ -23,6 +23,7 @@
 #ifndef __BRUSHLIB_MATRIX_H__
 #define __BRUSHLIB_MATRIX_H__
 
+#include <math.h>
 #include <glib-object.h>
 #include <brushlib/brushlib-types.h>
 
@@ -36,30 +37,32 @@ BrushLibMatrix *brushlib_matrix_copy            (const BrushLibMatrix *matrix);
 void            brushlib_matrix_free            (BrushLibMatrix       *matrix);
 
 void            brushlib_matrix_init            (BrushLibMatrix       *matrix,
-                                                 double xx, double yx,
-                                                 double xy, double yy,
-                                                 double x0, double y0);
+                                                 gdouble xx, gdouble yx,
+                                                 gdouble xy, gdouble yy,
+                                                 gdouble x0, gdouble y0);
 void            brushlib_matrix_init_identity   (BrushLibMatrix       *matrix);
 void            brushlib_matrix_init_translate  (BrushLibMatrix       *matrix,
-                                                 double tx, double ty);
+                                                 gdouble tx, gdouble ty);
 void            brushlib_matrix_init_scale      (BrushLibMatrix       *matrix,
-                                                 double sx, double sy);
+                                                 gdouble sx, gdouble sy);
 void            brushlib_matrix_init_rotate     (BrushLibMatrix       *matrix,
-                                                 double radians);
+                                                 gdouble radians);
 
 void            brushlib_matrix_translate       (BrushLibMatrix       *matrix,
-                                                 double tx, double ty);
+                                                 gdouble tx, gdouble ty);
 void            brushlib_matrix_scale           (BrushLibMatrix       *matrix,
-                                                 double sx, double sy);
+                                                 gdouble sx, gdouble sy);
 void            brushlib_matrix_rotate          (BrushLibMatrix       *matrix,
-                                                 double radians);
+                                                 gdouble radians);
 
 void            brushlib_matrix_invert          (BrushLibMatrix       *matrix);
-void            brushlib_matrix_multiply        (BrushLibMatrix       *matrix);
+void            brushlib_matrix_multiply        (BrushLibMatrix       *result,
+                                                 const BrushLibMatrix *a,
+                                                 const BrushLibMatrix *b);
 void            brushlib_matrix_transform_distance (const BrushLibMatrix *matrix,
-                                                    double dx, double dy);
+                                                    gdouble dx, gdouble dy);
 void            brushlib_matrix_transform_point (const BrushLibMatrix *matrix,
-                                                 double *x, double *y);
+                                                 gdouble *x, gdouble *y);
 
 G_END_DECLS
 
