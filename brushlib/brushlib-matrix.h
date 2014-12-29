@@ -23,7 +23,7 @@
 #ifndef __BRUSHLIB_MATRIX_H__
 #define __BRUSHLIB_MATRIX_H__
 
-#include <glib-gobject.h>
+#include <glib-object.h>
 #include <brushlib/brushlib-types.h>
 
 G_BEGIN_DECLS
