@@ -91,7 +91,7 @@ brushlib_get_option_group (void)
 }
 
 static gboolean
-brushlib_parse_args (guint   *argc,
+brushlib_parse_args (gint    *argc,
                      gchar ***argv)
 {
   GOptionContext *option_context;
@@ -165,7 +165,7 @@ brushlib_init (int    *argc,
 
   brushlib_base_init ();
 
-  if (brushlib_parse_args ((guint*)argc, argv) == FALSE) {
+  if (brushlib_parse_args (argc, argv) == FALSE) {
     return BRUSHLIB_INIT_ERROR_INTERNAL;
   }
 
