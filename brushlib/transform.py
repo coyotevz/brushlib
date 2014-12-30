@@ -70,7 +70,7 @@ class Affine(namedtuple('Affine', 'a b c d e f g h i')):
         return ("Affine(%r, %r, %r,\n"
                 "       %r, %r, %r)") % self[:6]
 
-    @cached_prperty
+    @cached_property
     def determinant(self):
         a, b, c, d, e, f, g, h, i = self
         return a*e - b*d
