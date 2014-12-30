@@ -19,6 +19,17 @@ def cached_property(func):
     getter.func_name = name
     return property(getter, doc=doc)
 
+def cos_sin_deg(deg):
+    deg = deg % 360.0
+    if deg == 90.0:
+        return 0.0, 1.0
+    elif deg == 180.0:
+        return -1.0, 0.0
+    elif deg == 270.0:
+        return 0.0, -1.0
+    rad = math.radians(deg)
+    return math.cos(rad), meth.sin(rad)
+
 class Affine(namedtuple('Affine', 'a b c d e f g h i')):
 
     def __new__(self, *members):
@@ -53,7 +64,7 @@ class Affine(namedtuple('Affine', 'a b c d e f g h i')):
 
     @classmethod
     def rotation(cls, angle, pivot=None):
-        ca, sa = math.cos(math.radians(angle)), math.sin(math.radians(angle))
+        ca, sa = cos_sin_deg(angle)
         if pivot is None:
             return tuple.__new__(cls,
                 (ca, sa, 0.0,
