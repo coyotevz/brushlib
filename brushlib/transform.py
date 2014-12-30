@@ -28,7 +28,7 @@ def cos_sin_deg(deg):
     elif deg == 270.0:
         return 0.0, -1.0
     rad = math.radians(deg)
-    return math.cos(rad), meth.sin(rad)
+    return math.cos(rad), math.sin(rad)
 
 class Affine(namedtuple('Affine', 'a b c d e f g h i')):
 
