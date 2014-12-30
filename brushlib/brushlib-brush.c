@@ -47,7 +47,7 @@ enum {
 /* --- prototypes --- */
 static void brush_reset_impl (BrushLibBrush *brush);
 
-static guint brush_signals[LAST_SIGNAL] = { 0, };
+G_GNUC_UNUSED static guint brush_signals[LAST_SIGNAL] = { 0, };
 
 G_DEFINE_TYPE (BrushLibBrush, brushlib_brush, G_TYPE_OBJECT);
 
@@ -58,7 +58,7 @@ brush_set_property (GObject      *object,
                     GParamSpec   *pspec)
 {
   BrushLibBrush *brush;
-  BrushLibBrushPrivate *priv;
+  G_GNUC_UNUSED BrushLibBrushPrivate *priv;
 
   brush = BRUSHLIB_BRUSH (object);
   priv = BRUSHLIB_BRUSH_GET_PRIVATE (brush);
@@ -71,7 +71,7 @@ brush_get_property (GObject    *object,
                     GParamSpec *pspec)
 {
   BrushLibBrush *brush;
-  BrushLibBrushPrivate *priv;
+  G_GNUC_UNUSED BrushLibBrushPrivate *priv;
 
   brush = BRUSHLIB_BRUSH (object);
   priv = BRUSHLIB_BRUSH_GET_PRIVATE (brush);

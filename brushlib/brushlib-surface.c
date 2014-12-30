@@ -56,7 +56,7 @@ static guint surface_draw_dab_impl (BrushLibSurface *surface,
                                     const BrushLibBrush *brush);
 
 
-static guint           surface_signals[LAST_SIGNAL] = { 0, };
+G_GNUC_UNUSED static guint           surface_signals[LAST_SIGNAL] = { 0, };
 
 
 /* --- functions --- */
@@ -70,7 +70,7 @@ surface_set_property (GObject       *object,
                       GParamSpec    *pspec)
 {
   BrushLibSurface *surface;
-  BrushLibSurfacePrivate *priv;
+  G_GNUC_UNUSED BrushLibSurfacePrivate *priv;
 
   surface = BRUSHLIB_SURFACE (object);
   priv = BRUSHLIB_SURFACE_GET_PRIVATE (surface);
@@ -83,7 +83,7 @@ surface_get_property (GObject       *object,
                       GParamSpec    *pspec)
 {
   BrushLibSurface *surface;
-  BrushLibSurfacePrivate *priv;
+  G_GNUC_UNUSED BrushLibSurfacePrivate *priv;
 
   surface = BRUSHLIB_SURFACE (object);
   priv = BRUSHLIB_SURFACE_GET_PRIVATE (surface);

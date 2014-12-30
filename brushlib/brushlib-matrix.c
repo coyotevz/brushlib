@@ -30,7 +30,7 @@
 /* --- prototypes --- */
 static void     matrix_scalar_multiply     (BrushLibMatrix *matrix,
                                             gdouble scalar);
-static gboolean matrix_is_invertible       (const BrushLibMatrix *matrix);
+static gboolean matrix_is_invertible       (const BrushLibMatrix *matrix) G_GNUC_UNUSED;
 static gdouble  matrix_compute_determinant (const BrushLibMatrix *matrix);
 static void     matrix_compute_adjoint     (BrushLibMatrix *matrix);
 static void     matrix_get_affine          (const BrushLibMatrix *matrix,
@@ -242,7 +242,7 @@ matrix_is_invertible (const BrushLibMatrix *matrix)
   gdouble det;
   det = matrix_compute_determinant (matrix);
   return ISFINITE (det) && det != 0;
-}
+} G_GNUC_UNUSED
 
 static gdouble
 matrix_compute_determinant (const BrushLibMatrix *matrix)

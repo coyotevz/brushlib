@@ -43,7 +43,7 @@ tiled_surface_set_property (GObject       *object,
                             GParamSpec    *pspec)
 {
   BrushLibTiledSurface *tsurface;
-  BrushLibTiledSurfacePrivate *priv;
+  G_GNUC_UNUSED BrushLibTiledSurfacePrivate *priv;
 
   tsurface = BRUSHLIB_TILED_SURFACE (object);
   priv = BRUSHLIB_TILED_SURFACE_GET_PRIVATE (tsurface);
@@ -56,7 +56,7 @@ tiled_surface_get_property (GObject       *object,
                             GParamSpec    *pspec)
 {
   BrushLibTiledSurface *tsurface;
-  BrushLibTiledSurfacePrivate *priv;
+  G_GNUC_UNUSED BrushLibTiledSurfacePrivate *priv;
 
   tsurface = BRUSHLIB_TILED_SURFACE (object);
   priv = BRUSHLIB_TILED_SURFACE_GET_PRIVATE (tsurface);

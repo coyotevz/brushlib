@@ -109,7 +109,7 @@ brushlib_parse_args (guint   *argc,
   brushlib_group = brushlib_get_option_group ();
   g_option_context_set_main_group (option_context, brushlib_group);
 
-  if (!g_option_context_parse (option_context, argc, argv, &error))
+  if (!g_option_context_parse (option_context, (gint *)argc, argv, &error))
   {
     g_warning ("%s", error->message);
     g_error_free (error);
@@ -165,7 +165,7 @@ brushlib_init (int    *argc,
 
   brushlib_base_init ();
 
-  if (brushlib_parse_args (argc, argv) == FALSE) {
+  if (brushlib_parse_args ((guint*)argc, argv) == FALSE) {
     return BRUSHLIB_INIT_ERROR_INTERNAL;
   }
 
