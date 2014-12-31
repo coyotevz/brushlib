@@ -6,6 +6,13 @@ import math
 EPSILON = 1e-5
 EPSILON2 = EPSILON ** 2
 
+MIN_MOV = 4.0
+
+def set_min_mov(val):
+    global MIN_MOV
+    assert val > 0
+    MIN_MOV = val
+
 def cached_property(func):
     name = func.__name__
     doc = func.__doc__
@@ -163,19 +170,41 @@ class Ruler(Line):
         xm = (b2 - b1) / (a1 - a2)
         return Point(xm, xm * a1 + b1)
 
+    def project2(self, point):
+        snap_line = Line(*self)
+        dx, dy = snap_line.dx, snap_line.dy
+        dx2, dy2 = dx**2, dy**2
+        x = (dx2 * point.x + dy2 * snap_line.p1.x + dx * dy * (point.y - snap_line.p1.y)) / (dx2 + dy2)
+        y = (dx2 * snap_line.p1.y + dy2 * point.y + dx * dy * (point.x - snap_line.p1.x)) / (dx2 + dy2)
+        return Point(x, y)
+
 
 class ParallelRuler(Line):
 
     def project(self, point, stroke_begin):
         dx, dy = point - stroke_begin
-        if (dx*dx + dy*dy) < 4.0:
+        if (dx*dx + dy*dy) < MIN_MOV:
             # allow some movement before snapping
             return stroke_begin
         snap_line = Line(*self)
         translation = Affine.translation(*(stroke_begin - self.p1))
         snap_line = snap_line.translated(translation)
         dx, dy = snap_line.dx, snap_line.dy
-        dx2, dy2 = dx*dx, dy*dy
+        dx2, dy2 = dx**2, dy**2
+        x = (dx2 * point.x + dy2 * snap_line.p1.x + dx * dy * (point.y - snap_line.p1.y)) / (dx2 + dy2)
+        y = (dx2 * snap_line.p1.y + dy2 * point.y + dx * dy * (point.x - snap_line.p1.x)) / (dx2 + dy2)
+        return Point(x, y)
+
+
+class VanishingPoint(Point):
+
+    def project(self, point, stroke_begin):
+        dx, dy = point - stroke_begin
+        if (dx*dx + dy*dy) < MIN_MOV:
+            return stroke_begin
+        snap_line = Line(self, stroke_begin)
+        dx, dy = snap_line.dx, snap_line.dy
+        dx2, dy2 = dx**x2, dy**2
         x = (dx2 * point.x + dy2 * snap_line.p1.x + dx * dy * (point.y - snap_line.p1.y)) / (dx2 + dy2)
         y = (dx2 * snap_line.p1.y + dy2 * point.y + dx * dy * (point.x - snap_line.p1.x)) / (dx2 + dy2)
         return Point(x, y)
