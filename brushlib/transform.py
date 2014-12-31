@@ -172,10 +172,8 @@ class ParallelRuler(Line):
             # allow some movement before snapping
             return stroke_begin
         snap_line = Line(*self)
-        print("snap_line = %r" % (snap_line,))
         translation = Affine.translation(*(stroke_begin - self.p1))
         snap_line = snap_line.translated(translation)
-        print("snap_line = %r" % (snap_line,))
         dx, dy = snap_line.dx, snap_line.dy
         dx2, dy2 = dx*dx, dy*dy
         x = (dx2 * point.x + dy2 * snap_line.p1.x + dx * dy * (point.y - snap_line.p1.y)) / (dx2 + dy2)
