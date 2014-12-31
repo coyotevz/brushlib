@@ -144,6 +144,9 @@ class Point(namedtuple('Point', 'x y')):
     def __radd__(self, other):
         return self.__add__(other)
 
+    def __neg__(self):
+        return tuple.__new__(Point, (-self.x, -self.y))
+
 
 class Line(namedtuple('Line', 'p1 p2')):
 
