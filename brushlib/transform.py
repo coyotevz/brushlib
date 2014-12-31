@@ -144,6 +144,13 @@ class Point(namedtuple('Point', 'x y')):
     def __radd__(self, other):
         return self.__add__(other)
 
+    def __mul__(self, other):
+        try:
+            p = tuple.__new__(Point, (self.x * other, self.y * other))
+        except Exception:
+            return NotImplemented
+        return p
+
     def __neg__(self):
         return tuple.__new__(Point, (-self.x, -self.y))
 
