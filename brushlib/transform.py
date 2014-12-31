@@ -111,3 +111,73 @@ class Affine(namedtuple('Affine', 'a b c d e f g h i')):
             return (vx * sa + vy * sd + sc, vx * sb + vy * se + sf)
 
 identity = Affine(1, 0, 0, 0, 1, 0)
+
+
+class Point(namedtuple('Point', 'x y')):
+
+    def __sub__(self, other):
+        sx, sy = self
+        try:
+            ox, oy = other
+        except Exception:
+            return NotImplemented
+        return tuple.__new__(Point, (sx - ox, sy - oy))
+
+    def __add__(self, other):
+        sx, sy = self
+        try:
+            ox, oy = other
+        except Exception:
+            return NotImplemented
+        return tuple.__new__(Point, (sx + ox, sy + oy))
+
+    def __rsub__(self, other):
+        return self.__sub__(other)
+
+    def __radd__(self, other):
+        return self.__add__(other)
+
+
+class Line(namedtuple('Line', 'p1 p2')):
+
+    @property
+    def dx(self):
+        return self.p1.x - self.p2.x
+
+    @property
+    def dy(self):
+        return self.p1.y - self.p2.y
+
+    def translated(self, affine):
+        return tuple.__new__(Line, (Point(*(affine * self.p1)), Point(*(affine * self.p2))))
+
+
+class Ruler(Line):
+
+    def project(self, point):
+        p1, p2 = self
+        a1 = (p2.y - p1.y) / (p2.x - p1.x)
+        b1 = p1.y - p1.x * a1
+        a2 = (p2.x - p1.x) / (p1.y - p2.y)
+        b2 = point.y - a2 * point.x
+        xm = (b2 - b1) / (a1 - a2)
+        return Point(xm, xm * a1 + b1)
+
+
+class ParallelRuler(Line):
+
+    def project(self, point, stroke_begin):
+        dx, dy = point - stroke_begin
+        if (dx*dx + dy*dy) < 4.0:
+            # allow some movement before snapping
+            return stroke_begin
+        snap_line = Line(*self)
+        print("snap_line = %r" % (snap_line,))
+        translation = Affine.translation(*(stroke_begin - self.p1))
+        snap_line = snap_line.translated(translation)
+        print("snap_line = %r" % (snap_line,))
+        dx, dy = snap_line.dx, snap_line.dy
+        dx2, dy2 = dx*dx, dy*dy
+        x = (dx2 * point.x + dy2 * snap_line.p1.x + dx * dy * (point.y - snap_line.p1.y)) / (dx2 + dy2)
+        y = (dx2 * snap_line.p1.y + dy2 * point.y + dx * dy * (point.x - snap_line.p1.x)) / (dx2 + dy2)
+        return Point(x, y)
