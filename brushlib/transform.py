@@ -169,6 +169,19 @@ class Line(namedtuple('Line', 'p1 p2')):
         return tuple.__new__(Line, (Point(*(affine * self.p1)), Point(*(affine * self.p2))))
 
 
+class Ellipse(object):
+    __slots__ = ('p1', 'p2', 'p3', 'a', 'b', '_matrix')
+
+    def __init__(self, p1, p2, p3):
+        self.p1 = p1
+        self.p2 = p2
+        self.p3 = p3
+        self._update_matrix()
+
+    def _update_matrix(self):
+        print("updating matrix...")
+        self._matrix = 0
+
 class Ruler(Line):
 
     def project(self, point):
